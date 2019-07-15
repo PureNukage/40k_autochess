@@ -1,0 +1,1 @@
+draw_text(15,15,"Connected: " +string(ds_list_size(socketlist)))

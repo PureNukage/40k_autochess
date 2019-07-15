@@ -39,6 +39,14 @@
             }
         },
         {
+            "Key": "1cfd1b5c-4e7a-46a0-9d22-8c929e328501",
+            "Value": {
+                "id": "9a8d92f7-bb3f-495d-a75b-9b4546f222c6",
+                "resourcePath": "objects\\controller\\controller.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "207a87e1-5e97-4391-8823-3151b3a2f222",
             "Value": {
                 "id": "28a978d9-b133-4a66-831d-f9ae34a576a3",
@@ -111,6 +119,14 @@
             }
         },
         {
+            "Key": "6eb69eab-4609-4ac7-9d31-9f4d42be4d7c",
+            "Value": {
+                "id": "2d427810-1418-46aa-8099-322b0f239e48",
+                "resourcePath": "scripts\\enums_and_macros\\enums_and_macros.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "70df4700-a642-4d78-899e-5176a369bb19",
             "Value": {
                 "id": "2e038363-f806-400c-9419-32dcaf49bcfe",
@@ -167,6 +183,14 @@
             }
         },
         {
+            "Key": "e2714209-0365-4ebe-a2fd-1241730f1aa6",
+            "Value": {
+                "id": "4ebc377d-6b33-481f-b592-64875022892d",
+                "resourcePath": "scripts\\scr_connect\\scr_connect.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "f008ea93-8430-4969-92c2-bb6b8ab1722b",
             "Value": {
                 "id": "b6450794-b0f7-4d4d-9b92-17d48e1da4db",
@@ -183,6 +207,22 @@
             }
         },
         {
+            "Key": "f55efae2-9271-4a77-be8d-e2def0f3bcf8",
+            "Value": {
+                "id": "2a71cf1b-b805-4301-83a9-819a111adcfc",
+                "resourcePath": "scripts\\controls\\controls.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "f81fd292-65eb-4621-a9b0-5cbf1fc26705",
+            "Value": {
+                "id": "1810e32f-11fe-4e8c-ab52-bfdc24bda326",
+                "resourcePath": "objects\\o_button\\o_button.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "f9122192-a0b8-4fdb-b892-e0678e59569b",
             "Value": {
                 "id": "a3a8b608-e7ff-4f33-a358-7e716facdc2b",
@@ -192,7 +232,9 @@
         }
     ],
     "script_order": [
-        
+        "6eb69eab-4609-4ac7-9d31-9f4d42be4d7c",
+        "f55efae2-9271-4a77-be8d-e2def0f3bcf8",
+        "e2714209-0365-4ebe-a2fd-1241730f1aa6"
     ],
     "tutorial": ""
 }

@@ -127,6 +127,14 @@
             }
         },
         {
+            "Key": "68eb2321-9c7b-4dbb-9f90-54bf85d47678",
+            "Value": {
+                "id": "b58e1607-5980-4b99-aca4-41b7d1de983c",
+                "resourcePath": "scripts\\scr_receivedpacket\\scr_receivedpacket.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "6eb69eab-4609-4ac7-9d31-9f4d42be4d7c",
             "Value": {
                 "id": "2d427810-1418-46aa-8099-322b0f239e48",
@@ -188,6 +196,14 @@
                 "id": "fdcc8d94-f7a3-472f-a544-233f3292e1e0",
                 "resourcePath": "options\\linux\\options_linux.yy",
                 "resourceType": "GMLinuxOptions"
+            }
+        },
+        {
+            "Key": "ac90bccb-7614-4988-b413-db4dd49216e0",
+            "Value": {
+                "id": "856c7834-9172-475f-a73a-c6a1b54c8ce0",
+                "resourcePath": "scripts\\scr_unit_placement\\scr_unit_placement.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -266,7 +282,9 @@
     "script_order": [
         "6eb69eab-4609-4ac7-9d31-9f4d42be4d7c",
         "f55efae2-9271-4a77-be8d-e2def0f3bcf8",
-        "e2714209-0365-4ebe-a2fd-1241730f1aa6"
+        "e2714209-0365-4ebe-a2fd-1241730f1aa6",
+        "ac90bccb-7614-4988-b413-db4dd49216e0",
+        "68eb2321-9c7b-4dbb-9f90-54bf85d47678"
     ],
     "tutorial": ""
 }

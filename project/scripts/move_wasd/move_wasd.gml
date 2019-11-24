@@ -1,5 +1,5 @@
-hspd = (keyboard_check(ord("D")) - keyboard_check(ord("A")))*movespeed
-vspd = (keyboard_check(ord("S")) - keyboard_check(ord("W")))*movespeed
+hspd = (input.key_d - input.key_a)*movespeed
+vspd = (input.key_s - input.key_w)*movespeed
 
 x += hspd
 y += vspd

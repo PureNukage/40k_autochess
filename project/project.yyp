@@ -39,6 +39,14 @@
             }
         },
         {
+            "Key": "0730beec-91cd-40dd-b728-df0b6df19643",
+            "Value": {
+                "id": "358fead9-ea64-407e-b7f8-c5d25cdbe063",
+                "resourcePath": "objects\\gridController\\gridController.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "0eb210d9-15ee-4128-86e0-7aa3d343fdff",
             "Value": {
                 "id": "968a8366-d2ce-4d86-b340-d2435449372e",
@@ -83,6 +91,14 @@
             "Value": {
                 "id": "2b39870f-25c7-4e6a-9622-4796d4971fe7",
                 "resourcePath": "objects\\player\\player.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "4741b909-eeb0-45bb-a521-298b62eb9153",
+            "Value": {
+                "id": "21121dd1-d32f-481a-b426-1f133438bd46",
+                "resourcePath": "objects\\debug\\debug.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -132,6 +148,14 @@
                 "id": "c074c021-37a0-4c26-ab1d-33b3adf5d20b",
                 "resourcePath": "options\\ios\\options_ios.yy",
                 "resourceType": "GMiOSOptions"
+            }
+        },
+        {
+            "Key": "85f30e27-1e94-4a7c-bd61-dd2deaa083c9",
+            "Value": {
+                "id": "fdad2222-9482-4778-aea1-c6897870019c",
+                "resourcePath": "objects\\input\\input.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -247,6 +271,14 @@
             }
         },
         {
+            "Key": "d67c7a35-b222-4f46-b1ba-e5f84c7874d5",
+            "Value": {
+                "id": "2edc2228-990e-4c64-950e-d792e0638dde",
+                "resourcePath": "scripts\\macros_and_enums\\macros_and_enums.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "e085a779-aab1-4016-a839-19f8e5646bd7",
             "Value": {
                 "id": "65a64cd9-3130-4093-bd0c-38b09166e0f9",
@@ -297,7 +329,8 @@
     ],
     "script_order": [
         "8dcd570f-ec9a-4680-9df7-066048050187",
-        "a8ab186d-da25-4805-b0f0-41289c7b2a68"
+        "a8ab186d-da25-4805-b0f0-41289c7b2a68",
+        "d67c7a35-b222-4f46-b1ba-e5f84c7874d5"
     ],
     "tutorial": ""
 }

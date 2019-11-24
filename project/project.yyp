@@ -87,6 +87,14 @@
             }
         },
         {
+            "Key": "3a6965ce-7b71-42fc-b38f-47e3303f55ac",
+            "Value": {
+                "id": "bc9d35bc-eaa2-4811-8c4c-47d42ca6421a",
+                "resourcePath": "objects\\unitController\\unitController.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "4539f2d3-48f8-4b35-bc1c-585c6489040a",
             "Value": {
                 "id": "2b39870f-25c7-4e6a-9622-4796d4971fe7",
@@ -279,6 +287,14 @@
             }
         },
         {
+            "Key": "c05a8444-a2fc-4604-a8e9-977a44d869ef",
+            "Value": {
+                "id": "da7229a0-44b9-440b-a2f0-5e12d8e6fcb7",
+                "resourcePath": "objects\\match\\match.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "c4531917-36a0-49fd-9ece-ac6b38e0db48",
             "Value": {
                 "id": "231fc1ec-6de7-4e06-9cc3-3f47e261ffdd",
@@ -332,6 +348,14 @@
                 "id": "69af5d9c-dbcb-494f-ba9c-3a562ce77145",
                 "resourcePath": "options\\android\\options_android.yy",
                 "resourceType": "GMAndroidOptions"
+            }
+        },
+        {
+            "Key": "eb7d76b7-496f-40c9-aaf2-f4bb01e6d966",
+            "Value": {
+                "id": "e66ddc79-134b-4f34-90a3-b500f94f41b5",
+                "resourcePath": "objects\\user\\user.yy",
+                "resourceType": "GMObject"
             }
         },
         {

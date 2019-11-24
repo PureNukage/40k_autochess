@@ -2,6 +2,8 @@ switch(mode)
 {
 	case 2:
 	
+	draw_set_halign(fa_left)
+	
 	var _x = 15
 	var _y = 15
 	

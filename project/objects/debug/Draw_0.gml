@@ -5,6 +5,8 @@ switch(mode)
 	break
 	case 1:
 		
+		draw_set_color(c_white)
+		
 		var _xx = 0
 		var _yy = 0
 		for(var _x=0;_x<grid_width;_x++) {

@@ -4,7 +4,7 @@ switch(states)
 		case states.free:
 	
 			//  Go into placement mode with a spacemarine selected
-			if input.keypress_space {
+			if input.keypress_space and match.whose_turn == id {
 				states = states.placement
 	
 				var _xx = gridController.grid_positions_x[input.grid_x]

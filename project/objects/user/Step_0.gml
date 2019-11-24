@@ -54,6 +54,9 @@ switch(states)
 				//	Place unit into grid
 				gridController.grid[# input.grid_x, input.grid_y] = unit_placing.object_index
 				
+				//	Clean up data and state change
+				unit_placing = -1
+				unit_placeable = false
 				states = states.free
 				
 			}

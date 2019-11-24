@@ -98,7 +98,7 @@
             "Key": "4539f2d3-48f8-4b35-bc1c-585c6489040a",
             "Value": {
                 "id": "2b39870f-25c7-4e6a-9622-4796d4971fe7",
-                "resourcePath": "objects\\player\\player.yy",
+                "resourcePath": "objects\\testPlayer\\testPlayer.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -179,6 +179,14 @@
             "Value": {
                 "id": "fdad2222-9482-4778-aea1-c6897870019c",
                 "resourcePath": "objects\\input\\input.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "8707a1d3-2fa4-4dcc-a9a8-25e4f7032e5e",
+            "Value": {
+                "id": "81571238-e734-4143-9762-ccc53db5d71b",
+                "resourcePath": "objects\\enemy\\enemy.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -335,6 +343,14 @@
             }
         },
         {
+            "Key": "df884371-2266-4818-aaba-ea4e6d0da062",
+            "Value": {
+                "id": "834c3cdb-17b0-41af-a0d4-fecfcd5b5574",
+                "resourcePath": "views\\df884371-2266-4818-aaba-ea4e6d0da062.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "e085a779-aab1-4016-a839-19f8e5646bd7",
             "Value": {
                 "id": "65a64cd9-3130-4093-bd0c-38b09166e0f9",
@@ -372,6 +388,14 @@
                 "id": "b89775c9-78fd-4af1-aeec-7ef97fbfd581",
                 "resourcePath": "views\\ef350d68-0506-49cb-97c4-13dd64df7672.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "efc4ba3c-577c-41ba-b4f0-2ce0ef0e1e60",
+            "Value": {
+                "id": "3a993aee-34cd-4382-a9a5-58fa7706d130",
+                "resourcePath": "objects\\playerParent\\playerParent.yy",
+                "resourceType": "GMObject"
             }
         },
         {

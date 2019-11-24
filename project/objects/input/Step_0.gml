@@ -7,7 +7,9 @@ keypress_space = keyboard_check_pressed(vk_space)
 
 keypress_control = keyboard_check_pressed(vk_control)
 
+mouse_left = mouse_check_button(mb_left)
 mouse_leftpress = mouse_check_button_pressed(mb_left)
+mouse_leftrelease = mouse_check_button_released(mb_left)
 mouse_rightpress = mouse_check_button_pressed(mb_right)
 
 var _xx = 0

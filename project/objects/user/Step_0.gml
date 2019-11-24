@@ -22,7 +22,9 @@ switch(states)
 		case states.placement:
 		
 			//	Moving the unit to the right cell position
-			if (unit_placing.x != gridController.grid_positions_x[input.grid_x] and 
+			if (input.grid_x > -1 and input.grid_x < grid_width) and 
+			(input.grid_y > -1 and input.grid_y < grid_height) and 
+			(unit_placing.x != gridController.grid_positions_x[input.grid_x] and 
 			unit_placing.y != gridController.grid_positions_y[input.grid_y]) {
 				
 				unit_placeable = true

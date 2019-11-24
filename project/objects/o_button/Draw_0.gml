@@ -1,6 +1,0 @@
-draw_set_color(c_lime)
-draw_roundrect(x+1,y+1,x+sizeX-2,y+sizeY-2,false)
-draw_set_color(c_black)
-draw_roundrect(x+0,y+0,x+sizeX-1,y+sizeY-1,true)
-draw_set_halign(fa_center)
-draw_text(x+sizeX/2,y+sizeY/3,text)

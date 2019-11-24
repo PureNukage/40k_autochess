@@ -199,6 +199,14 @@
             }
         },
         {
+            "Key": "965531f2-5430-4e73-a701-9a4f1a876639",
+            "Value": {
+                "id": "624de284-a976-4dbb-9fe1-b4d2d1cdfd23",
+                "resourcePath": "scripts\\arm_aim_xy\\arm_aim_xy.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "992d0da2-0b05-4319-91f8-1e760199d028",
             "Value": {
                 "id": "37dae123-9660-45d3-9aaa-1386f448a647",
@@ -386,7 +394,8 @@
     "script_order": [
         "8dcd570f-ec9a-4680-9df7-066048050187",
         "a8ab186d-da25-4805-b0f0-41289c7b2a68",
-        "d67c7a35-b222-4f46-b1ba-e5f84c7874d5"
+        "d67c7a35-b222-4f46-b1ba-e5f84c7874d5",
+        "965531f2-5430-4e73-a701-9a4f1a876639"
     ],
     "tutorial": ""
 }

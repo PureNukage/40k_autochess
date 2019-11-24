@@ -8,12 +8,12 @@ y += vspd
 
 if arm_rotation > 90 and arm_rotation < 270 {
 	image_xscale = -1	
-	arm_x = x+180
-	arm_y = y-209
+	arm_x = x+24
+	arm_y = y-17
 	arm_yscale = -1
 } else {
 	image_xscale = 1
-	arm_x = x-180
-	arm_y = y-209
+	arm_x = x-24
+	arm_y = y-17
 	arm_yscale = 1
 }

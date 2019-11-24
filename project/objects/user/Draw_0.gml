@@ -1,4 +1,4 @@
-if input.grid_x > -1 and input.grid_y > -1 {
+if input.grid_x > -1 and input.grid_y > -1 and states == states.placement {
 	var _xx = gridController.grid_positions_x[input.grid_x]
 	var _yy = gridController.grid_positions_y[input.grid_y]
 	

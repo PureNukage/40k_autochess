@@ -1,7 +1,7 @@
 switch(states)
 {
 	#region Unit Placement
-		case states.unit_placement:
+		case states.placement:
 			
 			
 			

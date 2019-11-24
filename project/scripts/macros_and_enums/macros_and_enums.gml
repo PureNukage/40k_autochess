@@ -7,7 +7,7 @@
 #macro gui_mouse_y device_mouse_y_to_gui(0)
 
 enum states {
-	unit_placement,
-	
+	free,
+	placement,
 	
 }

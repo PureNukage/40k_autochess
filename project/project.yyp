@@ -146,7 +146,7 @@
             "Key": "747a2030-cece-4423-8044-ffcbc84d97a3",
             "Value": {
                 "id": "c3a8de30-9cb7-4012-8e14-45336301dcbb",
-                "resourcePath": "sprites\\s_ork_arm\\s_ork_arm.yy",
+                "resourcePath": "sprites\\s_ork_leftarm\\s_ork_leftarm.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -276,6 +276,14 @@
                 "id": "e1e31946-5c7e-4f63-8c4f-df5648fff1b1",
                 "resourcePath": "rooms\\room0\\room0.yy",
                 "resourceType": "GMRoom"
+            }
+        },
+        {
+            "Key": "b51f9e69-8be7-4e8c-8936-40972920eb7f",
+            "Value": {
+                "id": "24b4ebfe-17b2-41cd-9e03-9d9fce04c7df",
+                "resourcePath": "sprites\\s_ork_rightarm\\s_ork_rightarm.yy",
+                "resourceType": "GMSprite"
             }
         },
         {

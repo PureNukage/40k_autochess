@@ -2,7 +2,7 @@
     "id": "a7a31c81-0a86-426d-a53d-01bf686cb111",
     "modelName": "GMSprite",
     "mvc": "1.12",
-    "name": "s_ork_body",
+    "name": "s_spacemarine_body",
     "For3D": false,
     "HTile": false,
     "VTile": false,

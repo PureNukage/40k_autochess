@@ -2,7 +2,7 @@
     "id": "bb4feeda-2a05-45b1-96ca-8e0f4c450f86",
     "modelName": "GMSprite",
     "mvc": "1.12",
-    "name": "s_ork_arm",
+    "name": "s_spacemarine_arm",
     "For3D": false,
     "HTile": false,
     "VTile": false,

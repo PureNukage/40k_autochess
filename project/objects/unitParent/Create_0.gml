@@ -15,3 +15,7 @@ hspd = 0					//	Active; units horizontal speed
 vspd = 0					//	Active; units vertical speed
 
 owner = -1					//	Active; what player owns this unit
+path = path_add()			//	Active; units path
+pos = -1					//	Active; current position in the path
+x_goto = 0					//	Active; next x position in the path
+y_goto = 0					//	Active; next y position in the path

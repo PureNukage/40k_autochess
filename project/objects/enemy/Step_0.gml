@@ -23,7 +23,7 @@ switch(states)
 				if time.seconds_switch and time.seconds == time_wait {
 				
 					//	I am able to place another ork
-					if points >= 10 {
+					if points >= unitController.unit_array[ork,1] {
 						time_wait = time.seconds + 1
 						var _cell_x = irandom_range(grid_width-2,grid_width-1)
 						var _cell_y = irandom_range(0,grid_height-1)
@@ -40,7 +40,6 @@ switch(states)
 						var _ork = instance_create_layer(_xx,_yy,"Instances",ork)
 						_ork.owner = id
 						gridController.gridIDs[# _cell_x, _cell_y] = _ork
-						mp_grid_add_cell(gridController.mp_grid,_cell_x,_cell_y)
 						points -= unitController.unit_array[ork,1]
 						debug_log("Just placed an ORK at grid cell "+string(_cell_x)+","+string(_cell_y))
 					} 

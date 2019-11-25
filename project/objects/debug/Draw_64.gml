@@ -23,6 +23,17 @@ switch(mode)
 		draw_text(_x,_y,"grid moved: "+string(grid_moved))  _y += 15
 	}
 	
+	with user {											_y += 15
+		draw_text(_x,_y,"selected: "+string(selected))	_y += 15
+		draw_text(_x,_y,"cell goal possible: "+string(cell_goal_possible))  _y += 15
+		draw_text(_x,_y,"cell goal x: "+string(cell_goal_x))				_y += 15
+		draw_text(_x,_y,"cell goal y: "+string(cell_goal_y))				_y += 15
+		
+		
+		
+		
+	}	
+	
 	
 	
 	break;

@@ -22,6 +22,9 @@ button_color = button_color_free
 selected = -1
 selected_grid_x = -1
 selected_grid_y = -1
+cell_goal_x = -1
+cell_goal_y = -1
+cell_goal_possible = false
 
 // Inherit the parent event
 event_inherited()

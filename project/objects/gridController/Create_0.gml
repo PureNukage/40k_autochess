@@ -15,7 +15,7 @@ for(var _x=0;_x<grid_width;_x++) {
 	_yy = 0
 	for(var _y=0;_y<grid_height;_y++) {
 		grid_positions_x[_x] = _xx
-		grid_positions_y[_y] = _yy
+		grid_positions_y[_y] = _yy		
 		_yy += cell_height
 	}	
 	_xx += cell_width

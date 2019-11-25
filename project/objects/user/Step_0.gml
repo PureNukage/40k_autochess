@@ -4,7 +4,7 @@ switch(states)
 		case states.free:
 	
 			//  Go into placement mode with a spacemarine selected
-			if input.keypress_space and match.whose_turn == id {
+			if input.keypress_space and match.whose_turn == id and match.states = states.placement {
 				states = states.placement
 	
 				var _xx = gridController.grid_positions_x[input.grid_x]
@@ -53,6 +53,10 @@ switch(states)
 				
 				//	Place unit into grid
 				gridController.grid[# input.grid_x, input.grid_y] = unit_placing.object_index
+				gridController.gridIDs[# input.grid_x, input.grid_y] = unit_placing
+				
+				//	Make unit mine
+				unit_placing.owner = id
 				
 				//	Clean up data and state change
 				unit_placing = -1
@@ -69,6 +73,16 @@ switch(states)
 				states = states.free
 			}
 	
+		break
+	#endregion
+	
+	#region Movement
+		case states.movement:
+			
+			
+			
+			
+			
 		break
 	#endregion
 }	

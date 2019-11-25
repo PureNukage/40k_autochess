@@ -2,6 +2,7 @@ switch(states)
 {
 	#region Placement
 		case states.placement:
+		case states.free:
 		
 			draw_set_color(c_white)
 			draw_set_halign(fa_center)

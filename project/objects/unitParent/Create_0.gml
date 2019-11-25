@@ -13,3 +13,5 @@ arm_yscale = 1				//	Active; the image_yscale of the arm
 
 hspd = 0					//	Active; units horizontal speed
 vspd = 0					//	Active; units vertical speed
+
+owner = -1					//	Active; what player owns this unit

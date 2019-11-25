@@ -9,5 +9,6 @@
 enum states {
 	free,
 	placement,
+	movement,
 	
 }

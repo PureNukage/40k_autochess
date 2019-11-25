@@ -84,7 +84,6 @@ switch(states)
 	#region Movement
 		case states.movement:
 			
-			
 			#region No unit selected
 				if mouse_in_grid and selected == -1 {
 					var _xx = gridController.grid_positions_x[input.grid_x]
@@ -115,7 +114,7 @@ switch(states)
 						var _xx = gridController.grid_positions_x[input.grid_x]
 						var _yy = gridController.grid_positions_y[input.grid_y]
 						var goal_x = _xx + cell_width/2
-						var goal_y = _yy + cell_height/2
+						var goal_y = _yy + cell_height/2 - 15
 						if mp_grid_define_path(selected.x,selected.y,goal_x,goal_y,selected.path,gridController.mp_grid,false) {
 							cell_goal_x = input.grid_x
 							cell_goal_y = input.grid_y
@@ -161,8 +160,37 @@ switch(states)
 					
 				}
 			#endregion
-			
-			
+				
 		break
 	#endregion
 }	
+
+#region End Turn Button
+	if match.whose_turn == id {
+	
+		if point_in_rectangle(gui_mouse_x,gui_mouse_y,buttonX,buttonY,buttonX+button_width,buttonY+button_height) and unit_placing == -1 {
+			button_mouseover = true
+			button_color = button_color_mouseover
+		
+			//	If pressing END TURN
+			if input.mouse_leftpress or input.mouse_left {
+				button_color = button_color_pressed		
+			}
+		
+			if input.mouse_leftrelease {
+				button_color = button_color_pressed
+				match.whose_turn_index++
+				if match.whose_turn_index >= ds_list_size(match.player_list) {
+					match.whose_turn_index = 0	
+				}
+				match.whose_turn = match.player_list[| match.whose_turn_index]
+			
+			}	
+		
+		
+		} else {
+			button_mouseover = false	
+			button_color = button_color_free
+		}
+	}
+#endregion

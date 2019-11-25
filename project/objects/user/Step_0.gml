@@ -127,8 +127,26 @@ switch(states)
 						}
 					}	
 					
+					//	Attempt to move the unit to our desired cell
+					if input.mouse_leftpress and cell_goal_possible == true {
+						selected.pos = 1
+						selected.x_goto = path_get_point_x(selected.path,selected.pos)
+						selected.y_goto = path_get_point_y(selected.path,selected.pos)
+						selected.states = states.movement
+						
+						//	Clear vars
+						selected = -1
+						selected_grid_x = -1
+						selected_grid_y = -1
+						cell_goal_possible = false
+						cell_goal_x = -1
+						cell_goal_y = -1
+					}
+					
 					//	Right Click to deselect our selected unit
 					if input.mouse_rightpress {
+						
+						//	Clear vars
 						selected = -1
 						selected_grid_x = -1
 						selected_grid_y = -1

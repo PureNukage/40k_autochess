@@ -40,6 +40,7 @@ switch(states)
 						var _ork = instance_create_layer(_xx,_yy,"Instances",ork)
 						_ork.owner = id
 						gridController.gridIDs[# _cell_x, _cell_y] = _ork
+						mp_grid_add_cell(gridController.mp_grid,_cell_x,_cell_y)
 						points -= unitController.unit_array[ork,1]
 						debug_log("Just placed an ORK at grid cell "+string(_cell_x)+","+string(_cell_y))
 					} 

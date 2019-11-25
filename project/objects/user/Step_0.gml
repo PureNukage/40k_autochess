@@ -42,8 +42,7 @@ switch(states)
 				}
 			
 			}
-			
-			
+					
 			//	Attempting to place the unit
 			if input.mouse_leftpress and unit_placeable == true {
 				
@@ -54,6 +53,7 @@ switch(states)
 				//	Place unit into grid
 				gridController.grid[# input.grid_x, input.grid_y] = unit_placing.object_index
 				gridController.gridIDs[# input.grid_x, input.grid_y] = unit_placing
+				mp_grid_add_cell(gridController.mp_grid,input.grid_x,input.grid_y)
 				
 				//	Make unit mine
 				unit_placing.owner = id

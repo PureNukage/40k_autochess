@@ -19,6 +19,10 @@ button_color_mouseover = c_gray
 button_color_pressed = c_dkgray
 button_color = button_color_free
 
+selected = -1
+selected_grid_x = -1
+selected_grid_y = -1
+
 // Inherit the parent event
 event_inherited()
 

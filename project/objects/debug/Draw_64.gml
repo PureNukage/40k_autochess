@@ -20,6 +20,7 @@ switch(mode)
 		draw_text(_x,_y,"INPUT")						_y += 15
 		draw_text(_x,_y,"grid x: "+string(grid_x))		_y += 15
 		draw_text(_x,_y,"grid y: "+string(grid_y))		_y += 15
+		draw_text(_x,_y,"grid moved: "+string(grid_moved))  _y += 15
 	}
 	
 	

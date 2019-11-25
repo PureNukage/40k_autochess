@@ -12,3 +12,6 @@ mouse_rightpress = mouse_check_button_pressed(mb_right)
 
 grid_x = -1
 grid_y = -1
+grid_xprevious = -1
+grid_yprevious = -1
+grid_moved = false

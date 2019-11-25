@@ -60,6 +60,8 @@ switch(states)
 				
 				//	Make unit mine
 				unit_placing.owner = id
+				unit_placing.cell_x = input.grid_x
+				unit_placing.cell_y = input.grid_y
 				
 				//	Clean up data and state change
 				unit_placing = -1
@@ -129,7 +131,9 @@ switch(states)
 					
 					//	Attempt to move the unit to our desired cell
 					if input.mouse_leftpress and cell_goal_possible == true {
-						selected.pos = 1
+						selected.cell_goal_x = cell_goal_x
+						selected.cell_goal_y = cell_goal_y
+						selected.pos = 0
 						selected.x_goto = path_get_point_x(selected.path,selected.pos)
 						selected.y_goto = path_get_point_y(selected.path,selected.pos)
 						selected.states = states.movement

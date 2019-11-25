@@ -19,3 +19,8 @@ path = path_add()			//	Active; units path
 pos = -1					//	Active; current position in the path
 x_goto = -1					//	Active; next x position in the path
 y_goto = -1					//	Active; next y position in the path
+
+cell_x = -1				//	Active; the cell x I am in
+cell_y = -1				//	Active; the cell y I am in
+cell_goal_x = -1		//	Active; the cell goal x of mine
+cell_goal_y = -1		//	Active; the cell goal y of mine

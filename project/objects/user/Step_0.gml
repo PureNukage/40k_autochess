@@ -69,7 +69,7 @@ switch(states)
 			
 			}
 					
-			//	Attempting to place the unit
+			//	Placing the unit
 			if input.mouse_leftpress and unit_placeable == true {
 				
 				//	Subtract points
@@ -84,6 +84,7 @@ switch(states)
 				unit_placing.owner = id
 				unit_placing.cell_x = input.grid_x
 				unit_placing.cell_y = input.grid_y
+				ds_list_add(units,unit_placing)
 				
 				//	Clean up data and state change
 				unit_placing = -1

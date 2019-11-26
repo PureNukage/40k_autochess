@@ -84,7 +84,16 @@ switch(states)
 			if time.seconds_switch and time.seconds == time_wait {
 				
 				//	Select a random ork
-				
+				if !ds_list_empty(units) {
+					selected = ds_list_find_value(units,irandom_range(0,ds_list_size(units)-1))
+					selected_grid_x = selected.cell_x
+					selected_grid_y = selected.cell_y
+					
+					//	Look for goal cell within 6 cells from this unit
+					
+				} else {
+					debug_log("ERROR I have no units on the battlefield!")	
+				}
 				
 				
 			}

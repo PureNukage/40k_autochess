@@ -128,7 +128,7 @@ switch(states)
 						}
 					}	
 					
-					//	Attempt to move the unit to our desired cell
+					//	Move the unit to our desired cell
 					if input.mouse_leftpress and cell_goal_possible == true {
 						selected.cell_goal_x = cell_goal_x
 						selected.cell_goal_y = cell_goal_y
@@ -136,6 +136,10 @@ switch(states)
 						selected.x_goto = path_get_point_x(selected.path,selected.pos)
 						selected.y_goto = path_get_point_y(selected.path,selected.pos)
 						selected.states = states.movement
+						
+						//	Clear grid cell where unit was
+						gridController.grid[# selected_grid_x, selected_grid_y] = -1
+						gridController.gridIDs[# selected_grid_x, selected_grid_y] = -1
 						
 						//	Clear vars
 						selected = -1

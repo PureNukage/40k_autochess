@@ -9,8 +9,6 @@ switch(match.states)
 	
 			draw_set_halign(fa_center)
 			draw_set_valign(fa_top)
-			
-			draw_text(_x,_y,"DEPLOYMENT PHASE")			_y += 15
 	
 			if match.whose_turn == id {
 				draw_text(_x,_y,"YOUR TURN TO PLACE UNITS (spacebar)")
@@ -29,8 +27,6 @@ switch(match.states)
 			draw_set_color(c_white)
 			
 			draw_set_halign(fa_center)
-			
-			draw_text(_x,_y,"MOVEMENT PHASE")		_y += 15 
 			
 			if match.whose_turn == id {
 				draw_text(_x,_y,"YOUR TURN TO MOVE")

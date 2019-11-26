@@ -89,7 +89,20 @@ switch(states)
 					selected_grid_x = selected.cell_x
 					selected_grid_y = selected.cell_y
 					
-					//	Look for goal cell within 6 cells from this unit
+					//	Find a cell near an enemy unit
+					if !ds_list_empty(user.units) {
+						var enemy_unit = ds_list_find_value(user.units,irandom_range(0,ds_list_size(user.units)-1))
+						
+						//	Find empty cell next to enemy
+						if gridController.grid[# enemy_unit.cell_x + 1, enemy_unit.cell_y] == -1 {
+								
+						}
+						
+						
+						
+					} else {
+						debug_log("ERROR There are no enemies of mine on the battlefield!")	
+					}
 					
 				} else {
 					debug_log("ERROR I have no units on the battlefield!")	

@@ -142,6 +142,10 @@ switch(states)
 					//	Clear grid cell where unit was
 					gridController.grid[# selected_grid_x, selected_grid_y] = -1
 					gridController.gridIDs[# selected_grid_x, selected_grid_y] = -1
+					
+					//	Put unit into goal grid cell
+					gridController.grid[# cell_goal_x, cell_goal_y] = selected.object_index
+					gridController.gridIDs[# cell_goal_x, cell_goal_y] = selected
 						
 					//	Clear vars
 					selected = -1

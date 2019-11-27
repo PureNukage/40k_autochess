@@ -16,6 +16,10 @@ switch(mode)
 				draw_set_color(c_white)
 				draw_rectangle(_xx,_yy,_xx+cell_width,_yy+cell_height,true)	
 				
+				//	Draw cells x,y
+				draw_text(_xx+15,_yy+5,string(_x))
+				draw_text(_xx+30,_yy+5,string(_y))
+				
 				//	Draw mp_grid collision
 				if mp_grid_get_cell(gridController.mp_grid,_x,_y) == -1 {
 					draw_set_color(c_red)	

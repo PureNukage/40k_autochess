@@ -44,6 +44,8 @@ switch(states)
 					//	Spawn ork and place in grid
 					var _ork = instance_create_layer(_xx,_yy,"Instances",ork)
 					_ork.owner = id
+					_ork.cell_x = _cell_x
+					_ork.cell_y = _cell_y
 					gridController.gridIDs[# _cell_x, _cell_y] = _ork
 					gridController.grid[# _cell_x, _cell_y] = ork
 					ds_list_add(units,_ork)
@@ -93,12 +95,49 @@ switch(states)
 					if !ds_list_empty(user.units) {
 						var enemy_unit = ds_list_find_value(user.units,irandom_range(0,ds_list_size(user.units)-1))
 						
-						//	Find empty cell next to enemy
-						if gridController.grid[# enemy_unit.cell_x + 1, enemy_unit.cell_y] == -1 {
+						var check = check_nearby_cells(enemy_unit)
+						//	Found an empty cell!
+						if is_array(check) {
+							
+							//	Kick this unit into moving
+							cell_goal_x = check[0]
+							cell_goal_y = check[1]
+							selected.cell_goal_x = cell_goal_x
+							selected.cell_goal_y = cell_goal_y
+							
+							//	Define the path this unit will take
+							var _xx = gridController.grid_positions_x[cell_goal_x]
+							var _yy = gridController.grid_positions_y[cell_goal_y]
+							_xx += cell_width/2
+							_yy += cell_height/2
+							mp_grid_define_path(selected.x,selected.y,_xx,_yy,selected.path,gridController.mp_grid,false)
+							
+							selected.pos = 0
+							selected.x_goto = path_get_point_x(selected.path,selected.pos)
+							selected.y_goto = path_get_point_y(selected.path,selected.pos)
+							selected.states = states.movement
+							
+							//	Clear grid cell where unit was
+							gridController.grid[# selected_grid_x, selected_grid_y] = -1
+							gridController.gridIDs[# selected_grid_x, selected_grid_y] = -1
+							
+							//	Put unit into goal grid cell
+							gridController.grid[# cell_goal_x, cell_goal_y] = selected.object_index
+							gridController.gridIDs[# cell_goal_x, cell_goal_y] = selected
+							
+							//	Clear vars
+							selected = -1
+							selected_grid_x = -1
+							selected_grid_y = -1
+							cell_goal_possible = -1
+							cell_goal_x = -1
+							cell_goal_y = -1
+							
+						} 
+						//	No empty cells near this unit!
+						else {
 								
 						}
-						
-						
 						
 					} else {
 						debug_log("ERROR There are no enemies of mine on the battlefield!")	

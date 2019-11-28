@@ -2,14 +2,18 @@ switch(mode)
 {
 	#region Game Variables 
 		case 2:
+		
+		//	Draw window background
+		draw_set_color(c_gray)
+		draw_roundrect(window_gamevarsX,window_gamevarsY,window_gamevarsX+window_gamevars_width,window_gamevarsY+window_gamevars_height,false)
 	
 		draw_set_color(c_white)
 	
 		draw_set_halign(fa_left)
 		draw_set_valign(fa_top)
 	
-		var _x = 15
-		var _y = 15
+		var _x = window_gamevarsX+5
+		var _y = window_gamevarsY+5
 	
 		draw_text(_x,_y,"GENERAL")							_y += 15
 		draw_text(_x,_y,"gui mouse x: "+string(gui_mouse_x))_y += 15 

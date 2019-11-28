@@ -9,6 +9,7 @@ mp_grid = mp_grid_create(0,0,grid_width,grid_height,cell_width,cell_height)
 grid_positions_x = []
 grid_positions_y = []
 
+//	Put x and y for each grid cell into the grid_positions_x,y arrays
 var _xx = 0
 var _yy = 0
 for(var _x=0;_x<grid_width;_x++) {

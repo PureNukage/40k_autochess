@@ -14,6 +14,13 @@ switch(states)
 			//	My turn to move units
 			if match.whose_turn == id and match.states == states.movement {
 				
+				//	Make all units active
+				ds_list_clear(units_active)
+				for(var i=0;i<ds_list_size(units);i++) {
+					units[| i].active = true
+				}
+				ds_list_copy(units_active,units)
+				
 				time_wait = time.seconds + 1
 				states = states.movement
 			}
@@ -86,8 +93,8 @@ switch(states)
 			if time.seconds_switch and time.seconds == time_wait {
 				
 				//	Select a random ork
-				if !ds_list_empty(units) {
-					selected = ds_list_find_value(units,irandom_range(0,ds_list_size(units)-1))
+				if !ds_list_empty(units_active) {
+					selected = ds_list_find_value(units_active,irandom_range(0,ds_list_size(units_active)-1))
 					selected_grid_x = selected.cell_x
 					selected_grid_y = selected.cell_y
 					
@@ -99,7 +106,7 @@ switch(states)
 						//	Found an empty cell!
 						if is_array(check) {
 							
-							//	Kick this unit into moving
+							//	Pass the grid data
 							cell_goal_x = check[0]
 							cell_goal_y = check[1]
 							selected.cell_goal_x = cell_goal_x
@@ -125,6 +132,10 @@ switch(states)
 							gridController.grid[# cell_goal_x, cell_goal_y] = selected.object_index
 							gridController.gridIDs[# cell_goal_x, cell_goal_y] = selected
 							
+							//	This unit is not active anymore this phase
+							ds_list_delete(units_active,ds_list_find_index(units_active,selected))
+							selected.active = false
+							
 							//	Clear vars
 							selected = -1
 							selected_grid_x = -1
@@ -132,6 +143,8 @@ switch(states)
 							cell_goal_possible = -1
 							cell_goal_x = -1
 							cell_goal_y = -1
+							
+							time_wait = time.seconds + 1
 							
 						} 
 						//	No empty cells near this unit!
@@ -144,7 +157,9 @@ switch(states)
 					}
 					
 				} else {
-					debug_log("ERROR I have no units on the battlefield!")	
+					debug_log("I have no more active units on the battlefield")	
+					
+					
 				}
 				
 				

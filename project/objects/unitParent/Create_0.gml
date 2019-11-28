@@ -24,3 +24,5 @@ cell_x = -1						//	Active; the cell x I am in
 cell_y = -1						//	Active; the cell y I am in
 cell_goal_x = -1				//	Active; the cell goal x of mine
 cell_goal_y = -1				//	Active; the cell goal y of mine
+
+active = false					//	Active; whether or not this unit can do something still this phase

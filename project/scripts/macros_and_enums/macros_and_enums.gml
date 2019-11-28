@@ -6,8 +6,11 @@
 #macro gui_mouse_x device_mouse_x_to_gui(0)
 #macro gui_mouse_y device_mouse_y_to_gui(0)
 
+#macro mouse_in_grid (input.grid_x > -1 and input.grid_y > -1)
+
 enum states {
 	free,
 	placement,
-	
+	movement,
+	attack,
 }

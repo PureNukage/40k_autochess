@@ -1,17 +1,5 @@
-arm_aim_xy(x+1,y)
-
 switch(states)
 {
-	#region Free
-		case states.free:
-			
-			
-			
-			
-			
-		break
-	#endregion
-	
 	#region Movement
 		case states.movement:
 			
@@ -39,8 +27,10 @@ switch(states)
 				}
 			}
 			
-			mp_potential_step(x_goto,y_goto,movespeed,false)		
+			mp_potential_step(x_goto,y_goto,movespeed,false)
 			
 		break
 	#endregion
 }
+
+arm_aim_xy(x+1,y)

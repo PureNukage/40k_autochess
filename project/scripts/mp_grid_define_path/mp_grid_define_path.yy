@@ -1,8 +1,8 @@
 {
-    "id": "d67c7a35-b222-4f46-b1ba-e5f84c7874d5",
+    "id": "65893244-f861-42ef-a45e-6b40595de66c",
     "modelName": "GMScript",
     "mvc": "1.0",
-    "name": "macros_and_enums",
+    "name": "mp_grid_define_path",
     "IsCompatibility": false,
     "IsDnD": false
 }

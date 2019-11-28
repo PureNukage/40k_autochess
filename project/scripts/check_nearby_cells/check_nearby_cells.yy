@@ -1,8 +1,8 @@
 {
-    "id": "d67c7a35-b222-4f46-b1ba-e5f84c7874d5",
+    "id": "9d29346f-ea4c-4473-89f1-d1964ac83e02",
     "modelName": "GMScript",
     "mvc": "1.0",
-    "name": "macros_and_enums",
+    "name": "check_nearby_cells",
     "IsCompatibility": false,
     "IsDnD": false
 }

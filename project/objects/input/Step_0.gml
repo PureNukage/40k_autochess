@@ -18,12 +18,28 @@ for(var _x=0;_x<grid_width;_x++) {
 	_yy = 0
 	for(var _y=0;_y<grid_height;_y++) {
 		if point_in_rectangle(mouse_x,mouse_y,_xx,_yy,_xx+cell_width,_yy+cell_height) {
+			grid_xprevious = grid_x
+			grid_yprevious = grid_y
 			grid_x = _x
 			grid_y = _y
+			if grid_xprevious != grid_x or grid_yprevious != grid_y {
+				grid_moved = true	
+			} else {
+				grid_moved = false
+			}	
 			exit
 		} else {
-			grid_x = -1
-			grid_y = -1
+			if _x == grid_width and _y == grid_height {
+				grid_xprevious = grid_x
+				grid_yprevious = grid_y
+				grid_x = -1
+				grid_y = -1
+				if grid_xprevious != grid_x or grid_yprevious != grid_y {
+					grid_moved = true	
+				} else {
+					grid_moved = false
+				}
+			}
 		}
 		_yy += cell_height
 	}

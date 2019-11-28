@@ -4,7 +4,7 @@ switch(states)
 		case states.free:
 	
 			//  Go into placement mode with a spacemarine selected
-			if input.keypress_space and match.whose_turn == id {
+			if input.keypress_space and match.whose_turn == id and match.states = states.placement {
 				states = states.placement
 	
 				var _xx = gridController.grid_positions_x[input.grid_x]
@@ -12,20 +12,46 @@ switch(states)
 				_xx += cell_width/2
 				_yy += cell_height/2 - 15	
 				var _unit = instance_create_layer(_xx,_yy,"Instances",spacemarine)
-				unit_placing = _unit		
+				unit_placing = _unit
+				
+				unit_placeable = true
+				//	Check if this unit is placeable
+				if points < 10 or gridController.grid[# input.grid_x, input.grid_y] > -1 {
+					unit_placeable = false	
+				}
+
 			}
-	
+			
+			//	Select a unit to move
+			if mouse_in_grid and selected == -1 and match.whose_turn == id and match.states = states.movement {
+				var _xx = gridController.grid_positions_x[input.grid_x]
+				var _yy = gridController.grid_positions_y[input.grid_y]
+					
+				var _selectable = false
+				var grid_contents = gridController.grid[# input.grid_x, input.grid_y]
+				if grid_contents > -1 and grid_contents.owner == id {
+					_selectable = true	
+				}
+					
+				//	Selecting the unit we're hovered over
+				if input.mouse_leftpress and _selectable == true {
+					selected = gridController.gridIDs[# input.grid_x, input.grid_y]
+					selected_grid_x = input.grid_x
+					selected_grid_y = input.grid_y
+					states = states.movement
+				}			
+			}
+			
+			
+			
 		break
 	#endregion
 	
 	#region Placement
 		case states.placement:
 		
-			//	Moving the unit to the right cell position
-			if (input.grid_x > -1 and input.grid_x < grid_width) and 
-			(input.grid_y > -1 and input.grid_y < grid_height) and 
-			(unit_placing.x != gridController.grid_positions_x[input.grid_x] and 
-			unit_placing.y != gridController.grid_positions_y[input.grid_y]) {
+			//	Moving the unit to the mouse cell position
+			if mouse_in_grid and input.grid_moved {
 				
 				unit_placeable = true
 			
@@ -42,9 +68,8 @@ switch(states)
 				}
 			
 			}
-			
-			
-			//	Attempting to place the unit
+					
+			//	Placing the unit
 			if input.mouse_leftpress and unit_placeable == true {
 				
 				//	Subtract points
@@ -53,6 +78,13 @@ switch(states)
 				
 				//	Place unit into grid
 				gridController.grid[# input.grid_x, input.grid_y] = unit_placing.object_index
+				gridController.gridIDs[# input.grid_x, input.grid_y] = unit_placing
+				
+				//	Make unit mine
+				unit_placing.owner = id
+				unit_placing.cell_x = input.grid_x
+				unit_placing.cell_y = input.grid_y
+				ds_list_add(units,unit_placing)
 				
 				//	Clean up data and state change
 				unit_placing = -1
@@ -71,4 +103,103 @@ switch(states)
 	
 		break
 	#endregion
+	
+	#region Movement
+		case states.movement:
+			
+			// Unit selected
+			if mouse_in_grid and selected > -1 {
+					
+				//	Calculate the goal cell
+				if input.grid_moved {
+					
+					var _xx = gridController.grid_positions_x[input.grid_x]
+					var _yy = gridController.grid_positions_y[input.grid_y]
+					var goal_x = _xx + cell_width/2
+					var goal_y = _yy + cell_height/2 - 15
+					if mp_grid_define_path(selected.x,selected.y,goal_x,goal_y,selected.path,gridController.mp_grid,false) {
+						cell_goal_x = input.grid_x
+						cell_goal_y = input.grid_y
+						if gridController.grid[# cell_goal_x, cell_goal_y] == -1 {
+							cell_goal_possible = true
+						} else {
+							cell_goal_possible = false	
+						}
+					} else {
+						cell_goal_possible = false	
+					}
+				}	
+					
+				//	Move the unit to our desired cell
+				if input.mouse_leftpress and cell_goal_possible == true {
+					selected.cell_goal_x = cell_goal_x
+					selected.cell_goal_y = cell_goal_y
+					selected.pos = 0
+					selected.x_goto = path_get_point_x(selected.path,selected.pos)
+					selected.y_goto = path_get_point_y(selected.path,selected.pos)
+					selected.states = states.movement
+						
+					//	Clear grid cell where unit was
+					gridController.grid[# selected_grid_x, selected_grid_y] = -1
+					gridController.gridIDs[# selected_grid_x, selected_grid_y] = -1
+					
+					//	Put unit into goal grid cell
+					gridController.grid[# cell_goal_x, cell_goal_y] = selected.object_index
+					gridController.gridIDs[# cell_goal_x, cell_goal_y] = selected
+						
+					//	Clear vars
+					selected = -1
+					selected_grid_x = -1
+					selected_grid_y = -1
+					cell_goal_possible = false
+					cell_goal_x = -1
+					cell_goal_y = -1
+						
+					states = states.free
+				}
+					
+				//	Right Click to deselect our selected unit
+				if input.mouse_rightpress {
+						
+					//	Clear vars
+					selected = -1
+					selected_grid_x = -1
+					selected_grid_y = -1
+					cell_goal_possible = false
+					cell_goal_x = -1
+					cell_goal_y = -1
+						
+					states = states.free
+				}
+					
+			}
+				
+		break
+	#endregion
 }	
+
+#region End Turn Button
+	if match.whose_turn == id {
+	
+		if point_in_rectangle(gui_mouse_x,gui_mouse_y,buttonX,buttonY,buttonX+button_width,buttonY+button_height) and unit_placing == -1 {
+			button_mouseover = true
+			button_color = button_color_mouseover
+		
+			//	If pressing END TURN
+			if input.mouse_leftpress or input.mouse_left {
+				button_color = button_color_pressed		
+			}
+		
+			if input.mouse_leftrelease {
+				button_color = button_color_pressed
+				round_turn()
+			
+			}	
+		
+		
+		} else {
+			button_mouseover = false	
+			button_color = button_color_free
+		}
+	}
+#endregion

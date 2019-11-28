@@ -28,8 +28,8 @@ switch(states)
 				var _yy = gridController.grid_positions_y[input.grid_y]
 					
 				var _selectable = false
-				var grid_contents = gridController.grid[# input.grid_x, input.grid_y]
-				if grid_contents > -1 and grid_contents.owner == id {
+				var grid_contents = gridController.gridIDs[# input.grid_x, input.grid_y]
+				if grid_contents > -1 and grid_contents.owner == id and grid_contents.active == true {
 					_selectable = true	
 				}
 					
@@ -82,6 +82,7 @@ switch(states)
 				
 				//	Make unit mine
 				unit_placing.owner = id
+				unit_placing.active = true
 				unit_placing.cell_x = input.grid_x
 				unit_placing.cell_y = input.grid_y
 				ds_list_add(units,unit_placing)
@@ -134,6 +135,7 @@ switch(states)
 				if input.mouse_leftpress and cell_goal_possible == true {
 					selected.cell_goal_x = cell_goal_x
 					selected.cell_goal_y = cell_goal_y
+					selected.active = false
 					selected.pos = 0
 					selected.path = path_duplicate(path)					
 					selected.x_goto = path_get_point_x(selected.path,selected.pos)

@@ -12,5 +12,5 @@ enum states {
 	free,
 	placement,
 	movement,
-	
+	attack,
 }

@@ -11,6 +11,12 @@ switch(states)
 			var _state = "MOVEMENT PHASE"
 		break
 	#endregion
+
+	#region Attac
+		case states.attack:
+			var _state = "ATTACK PHASE"
+		break	
+	#endregion
 }
 
 //	Draw current phase

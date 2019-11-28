@@ -66,19 +66,7 @@ switch(states)
 					time_wait = 0
 					states = states.free
 					
-					//	This is the end of the placement round
-					if ds_list_find_index(match.player_list,id) == ds_list_size(match.player_list)-1 {
-						with match { 
-							round_turn(states.movement)
-						}
-					} 
-					//	This is NOT the end of the placement round
-					else {
-						with match {
-							round_turn(match.states)
-								
-						}
-					}					
+					round_turn()					
 						
 				}
 				
@@ -159,7 +147,7 @@ switch(states)
 				} else {
 					debug_log("I have no more active units on the battlefield")	
 					
-					
+					round_turn()
 				}
 				
 				

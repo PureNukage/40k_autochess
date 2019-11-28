@@ -98,7 +98,7 @@
             "Key": "3a6965ce-7b71-42fc-b38f-47e3303f55ac",
             "Value": {
                 "id": "bc9d35bc-eaa2-4811-8c4c-47d42ca6421a",
-                "resourcePath": "objects\\unitController\\unitController.yy",
+                "resourcePath": "objects\\data\\data.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -434,7 +434,7 @@
             "Key": "eb7d76b7-496f-40c9-aaf2-f4bb01e6d966",
             "Value": {
                 "id": "e66ddc79-134b-4f34-90a3-b500f94f41b5",
-                "resourcePath": "objects\\user\\user.yy",
+                "resourcePath": "objects\\player\\player.yy",
                 "resourceType": "GMObject"
             }
         },

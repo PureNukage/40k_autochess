@@ -34,7 +34,7 @@ switch(states)
 			if time.seconds_switch and time.seconds == time_wait {
 				
 				//	I am able to place another ork
-				if points >= unitController.unit_array[ork,1] {
+				if points >= data.units[ork,1] {
 					time_wait = time.seconds + 1
 					var _cell_x = irandom_range(grid_width-2,grid_width-1)
 					var _cell_y = irandom_range(0,grid_height-1)
@@ -58,7 +58,7 @@ switch(states)
 					ds_list_add(units,_ork)
 					
 					//	Subtract points
-					points -= unitController.unit_array[ork,1]
+					points -= data.units[ork,1]
 					debug_log("Just placed an ORK at grid cell "+string(_cell_x)+","+string(_cell_y))
 				} 
 				//	I am NOT able to place another ork; ending turn				
@@ -87,8 +87,8 @@ switch(states)
 					selected_grid_y = selected.cell_y
 					
 					//	Find a cell near an enemy unit
-					if !ds_list_empty(user.units) {
-						var enemy_unit = ds_list_find_value(user.units,irandom_range(0,ds_list_size(user.units)-1))
+					if !ds_list_empty(player.units) {
+						var enemy_unit = ds_list_find_value(player.units,irandom_range(0,ds_list_size(player.units)-1))
 						
 						var check = check_nearby_cells(enemy_unit)
 						//	Found an empty cell!

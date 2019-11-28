@@ -117,7 +117,7 @@ switch(states)
 					var _yy = gridController.grid_positions_y[input.grid_y]
 					var goal_x = _xx + cell_width/2
 					var goal_y = _yy + cell_height/2 - 15
-					if mp_grid_define_path(selected.x,selected.y,goal_x,goal_y,selected.path,gridController.mp_grid,false) {
+					if mp_grid_define_path(selected.x,selected.y,goal_x,goal_y,path,gridController.mp_grid,false) {
 						cell_goal_x = input.grid_x
 						cell_goal_y = input.grid_y
 						if gridController.grid[# cell_goal_x, cell_goal_y] == -1 {
@@ -135,6 +135,7 @@ switch(states)
 					selected.cell_goal_x = cell_goal_x
 					selected.cell_goal_y = cell_goal_y
 					selected.pos = 0
+					selected.path = path_duplicate(path)					
 					selected.x_goto = path_get_point_x(selected.path,selected.pos)
 					selected.y_goto = path_get_point_y(selected.path,selected.pos)
 					selected.states = states.movement
@@ -154,6 +155,7 @@ switch(states)
 					cell_goal_possible = false
 					cell_goal_x = -1
 					cell_goal_y = -1
+					path_clear_points(path)
 						
 					states = states.free
 				}

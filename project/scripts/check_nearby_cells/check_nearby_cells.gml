@@ -38,14 +38,13 @@ for(var i=0;i<4;i++) {
 			var _yy = gridController.grid_positions_y[enemy_cell_y]
 			_xx += cell_width/2
 			_yy += cell_height/2
-			var _path = path_add()
 			
 			//	Can we path find to this cell?
-			if mp_grid_define_path(selected.x,selected.y,_xx,_yy,_path,gridController.mp_grid,false) {
+			if mp_grid_define_path(selected.x,selected.y,_xx,_yy,path,gridController.mp_grid,false) {
 				ds_list_add(cell_x_list,enemy_cell_x)	
 				ds_list_add(cell_y_list,enemy_cell_y)
 			}
-			path_delete(_path)
+			path_clear_points(path)
 		}
 		
 	}

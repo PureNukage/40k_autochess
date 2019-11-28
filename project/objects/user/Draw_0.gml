@@ -82,7 +82,7 @@ switch(states)
 						
 							//	Draw path
 							draw_set_color(c_white)
-							draw_path(selected.path,selected.x,selected.y,true)
+							draw_path(path,selected.x,selected.y,true)
 						
 							draw_set_color(c_green)	
 						

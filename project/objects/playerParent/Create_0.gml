@@ -13,3 +13,5 @@ cell_goal_x = -1					//	Active; holds the cell x of the goal cell
 cell_goal_y = -1					//	Active; holds the cell y of the goal cell	
 cell_goal_possible = false			//	Active; is going to the desired goal cell possible?
 
+path = path_add()					//	Active; current path being pre-calculated for a unit
+

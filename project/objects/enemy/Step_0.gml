@@ -21,6 +21,9 @@ switch(states)
 				}
 				ds_list_copy(units_active,units)
 				
+				//	Throw players units into a list
+				ds_list_copy(units_player_free,player.units)
+				
 				time_wait = time.seconds + 1
 				states = states.movement
 			}
@@ -87,8 +90,8 @@ switch(states)
 					selected_grid_y = selected.cell_y
 					
 					//	Find a cell near an enemy unit
-					if !ds_list_empty(player.units) {
-						var enemy_unit = ds_list_find_value(player.units,irandom_range(0,ds_list_size(player.units)-1))
+					if !ds_list_empty(units_player_free) {
+						var enemy_unit = ds_list_find_value(units_player_free,irandom_range(0,ds_list_size(units_player_free)-1))
 						
 						var check = check_nearby_cells(enemy_unit)
 						//	Found an empty cell!
@@ -137,7 +140,10 @@ switch(states)
 						} 
 						//	No empty cells near this unit!
 						else {
-								
+							
+							//	Get rid of this unit from the units_player_free list and then wait another second to think again
+							ds_list_delete(units_player_free,ds_list_find_index(units_player_free,enemy_unit))
+							time_wait = time.seconds + 1
 						}
 						
 					} else {

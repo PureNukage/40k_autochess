@@ -122,8 +122,23 @@ switch(states)
 						if !ds_list_empty(player.units) {
 								
 							var random_marine = ds_list_find_value(player.units,irandom_range(0,ds_list_size(player.units)-1))
-							var _cell_goal_x = irandom_range(selected.cell_x,random_marine.cell_x)
-							var _cell_goal_y = irandom_range(selected.cell_y,random_marine.cell_y)
+							
+							var left_or_right = 0
+							var above_or_under = 0
+							//	Is my selected unit to the left or right of the enemy unit?
+							if selected_grid_x > random_marine.cell_x {
+								left_or_right = 1
+							} else {
+								left_or_right = -1	
+							}
+							if selected_grid_y > random_marine.cell_y {
+								above_or_under = 1
+							} else {
+								above_or_under = -1
+							}
+							
+							var _cell_goal_x = irandom_range(selected.cell_x-left_or_right,random_marine.cell_x+left_or_right)
+							var _cell_goal_y = irandom_range(selected.cell_y-above_or_under,random_marine.cell_y+above_or_under)
 								
 							move_unit_cellxy(_cell_goal_x,_cell_goal_y)
 								

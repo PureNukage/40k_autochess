@@ -34,6 +34,7 @@ switch(states)
 	#region Placement
 		case states.placement:
 			
+			//	Time to make a move
 			if time.seconds_switch and time.seconds == time_wait {
 				
 				//	I am able to place another ork
@@ -81,15 +82,16 @@ switch(states)
 	#region Movement
 		case states.movement:
 			
+			//	Time to make a move
 			if time.seconds_switch and time.seconds == time_wait {
 				
-				//	Select a random ork
+				#region	Select a random unit
 				if !ds_list_empty(units_active) {
 					selected = ds_list_find_value(units_active,irandom_range(0,ds_list_size(units_active)-1))
 					selected_grid_x = selected.cell_x
 					selected_grid_y = selected.cell_y
 					
-					//	Find a cell near an enemy unit
+					#region	Find a cell near an enemy free unit
 					if !ds_list_empty(units_player_free) {
 						var enemy_unit = ds_list_find_value(units_player_free,irandom_range(0,ds_list_size(units_player_free)-1))
 						
@@ -109,28 +111,45 @@ switch(states)
 							time_wait = time.seconds + 1
 						}
 						
-					} else {
-						debug_log("ERROR There are no enemies of mine on the battlefield!")	
-						
-						//	We still have ork(s) left to move; move the ork(s) somewhere nearby
-						if !ds_list_empty(units_active) {
-							var _ork = units_active[| 0]
-							
-							
-						}
-					}
+					} 
+					#endregion
 					
-				} else {
+					#region	There are no enemy free units
+					else {
+						debug_log("None of the enemies units have free cells!")	
+							
+						//	Choose a random enemy unit
+						if !ds_list_empty(player.units) {
+								
+							var random_marine = ds_list_find_value(player.units,irandom_range(0,ds_list_size(player.units)-1))
+							var _cell_goal_x = irandom_range(selected.cell_x,random_marine.cell_x)
+							var _cell_goal_y = irandom_range(selected.cell_y,random_marine.cell_y)
+								
+							move_unit_cellxy(_cell_goal_x,_cell_goal_y)
+								
+								
+							
+						} else {
+							debug_log("ERROR There are no spacemarines")	
+						}
+							
+							
+					}
+				#endregion
+					
+				} 
+				#endregion
+				
+				#region No more units of mine left to move
+				else {
 					debug_log("I have no more active units on the battlefield")	
 					
 					round_turn()
 				}
-				
+				#endregion		
 				
 			}
-			
-			
-			
+				
 		break
 	#endregion
 }

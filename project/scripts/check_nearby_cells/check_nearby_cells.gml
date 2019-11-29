@@ -59,6 +59,11 @@ if !ds_list_empty(cell_x_list) {
 	array[0] = ds_list_find_value(cell_x_list,random_index)
 	array[1] = ds_list_find_value(cell_y_list,random_index)
 	
+	//	If this is the only free cell this enemy unit has, remove it from the free list
+	if ds_list_size(cell_x_list) == 1 {
+		ds_list_delete(units_player_free,ds_list_find_index(units_player_free,_enemy))
+	}
+	
 	ds_list_destroy(cell_x_list)
 	ds_list_destroy(cell_y_list)
 	

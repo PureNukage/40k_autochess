@@ -28,3 +28,5 @@ cell_goal_y = -1				//	Active; the cell goal y of mine
 
 active = false					//	Active; whether or not this unit can do something still this phase
 ready = false					//	Active; whether or not this unit is readied
+
+target = -1						//	Active; holds the ID of my target

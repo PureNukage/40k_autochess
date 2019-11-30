@@ -140,9 +140,7 @@ switch(states)
 							var _cell_goal_x = irandom_range(selected.cell_x-left_or_right,random_marine.cell_x+left_or_right)
 							var _cell_goal_y = irandom_range(selected.cell_y-above_or_under,random_marine.cell_y+above_or_under)
 								
-							move_unit_cellxy(_cell_goal_x,_cell_goal_y)
-								
-								
+							move_unit_cellxy(_cell_goal_x,_cell_goal_y)						
 							
 						} else {
 							debug_log("ERROR There are no spacemarines")	

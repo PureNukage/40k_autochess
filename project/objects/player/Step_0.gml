@@ -29,7 +29,7 @@ switch(states)
 					
 				var _selectable = false
 				var grid_contents = gridController.gridIDs[# input.grid_x, input.grid_y]
-				if grid_contents > -1 and grid_contents.owner == id and grid_contents.active == true and ds_list_find_index(units_ready,grid_contents) == -1 {
+				if grid_contents > -1 and grid_contents.owner == id and grid_contents.active == true {
 					_selectable = true	
 				}
 					

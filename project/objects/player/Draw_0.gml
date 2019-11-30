@@ -9,8 +9,8 @@ switch(states)
 				var _yy = gridController.grid_positions_y[input.grid_y]
 				
 				var _selectable = false
-				var grid_contents = gridController.grid[# input.grid_x, input.grid_y]
-				if grid_contents > -1 and grid_contents.owner == id {
+				var grid_contents = gridController.gridIDs[# input.grid_x, input.grid_y]
+				if grid_contents > -1 and grid_contents.owner == id and grid_contents.active == true {
 					draw_set_color(c_yellow)
 					_selectable = true
 				} else {

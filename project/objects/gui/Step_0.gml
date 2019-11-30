@@ -39,6 +39,8 @@ if match.whose_turn == player.id and player.selected > -1 {
 		//	Ready the selected unit
 		if input.mouse_leftrelease { 
 			ds_list_add(player.units_ready,player.selected)
+			ds_list_delete(player.units_active,player.selected)
+			player.selected.active = false
 			
 			//	Clean up data
 			player.selected = -1

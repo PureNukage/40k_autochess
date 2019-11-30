@@ -179,4 +179,15 @@ switch(states)
 				
 		break
 	#endregion
+	
+	#region Attack
+		case states.attack:
+			
+			
+			
+			
+			
+		break
+	#endregion
+	
 }	

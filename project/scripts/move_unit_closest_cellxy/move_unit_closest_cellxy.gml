@@ -32,7 +32,9 @@ if !ds_list_empty(free_cells_x) {
 		var _goal_x = _cell_x
 		var _goal_y = _cell_y
 		var _distance = point_distance(_x,_y,_goal_x,_goal_y)
-		ds_list_add(distances_not_sorted,_distance)
+		if _distance <= selected.move_distance {
+			ds_list_add(distances_not_sorted,_distance)
+		}
 	}
 									
 	//	Sort compared distance list

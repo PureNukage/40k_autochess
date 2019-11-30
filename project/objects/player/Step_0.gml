@@ -38,7 +38,7 @@ switch(states)
 					selected = gridController.gridIDs[# input.grid_x, input.grid_y]
 					selected_grid_x = input.grid_x
 					selected_grid_y = input.grid_y
-					states = states.movement
+					//states = states.movement
 				}			
 			}
 			
@@ -181,29 +181,3 @@ switch(states)
 		break
 	#endregion
 }	
-
-#region End Turn Button
-	if match.whose_turn == id {
-	
-		if point_in_rectangle(gui_mouse_x,gui_mouse_y,buttonX,buttonY,buttonX+button_width,buttonY+button_height) and unit_placing == -1 {
-			button_mouseover = true
-			button_color = button_color_mouseover
-		
-			//	If pressing END TURN
-			if input.mouse_leftpress or input.mouse_left {
-				button_color = button_color_pressed		
-			}
-		
-			if input.mouse_leftrelease {
-				button_color = button_color_pressed
-				round_turn()
-			
-			}	
-		
-		
-		} else {
-			button_mouseover = false	
-			button_color = button_color_free
-		}
-	}
-#endregion

@@ -87,6 +87,14 @@
             }
         },
         {
+            "Key": "32aacb82-9ad1-4da7-940b-7a24ed0de456",
+            "Value": {
+                "id": "646e609d-582d-4de6-a4ae-4c839e91939c",
+                "resourcePath": "objects\\gui\\gui.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "37b3910c-3522-481d-805b-643a9f979a66",
             "Value": {
                 "id": "08a43952-19c2-4671-81c7-35f4129b563d",
@@ -100,6 +108,22 @@
                 "id": "bc9d35bc-eaa2-4811-8c4c-47d42ca6421a",
                 "resourcePath": "objects\\data\\data.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "41ffafb6-a34a-43d7-82d3-f5e0d00277c7",
+            "Value": {
+                "id": "d637d7c4-620b-4f92-b4bc-7b221a72b9e6",
+                "resourcePath": "views\\41ffafb6-a34a-43d7-82d3-f5e0d00277c7.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "42f418d8-6511-445d-b0d9-e544a4ca20ba",
+            "Value": {
+                "id": "abcf6e71-e667-42df-89d2-4cfdd4d5394f",
+                "resourcePath": "scripts\\drawButton\\drawButton.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -488,7 +512,8 @@
         "965531f2-5430-4e73-a701-9a4f1a876639",
         "b8480f53-5aed-4a8f-83c2-10af29e3b546",
         "756e470e-db93-46a0-bae7-659c3522853d",
-        "65893244-f861-42ef-a45e-6b40595de66c"
+        "65893244-f861-42ef-a45e-6b40595de66c",
+        "42f418d8-6511-445d-b0d9-e544a4ca20ba"
     ],
     "tutorial": ""
 }

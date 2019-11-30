@@ -137,6 +137,15 @@ switch(states)
 						} else {
 							cell_goal_possible = false	
 						}
+						
+						//	Check distance between selected.cells and cell_goal
+						if point_distance(selected_grid_x,selected_grid_y,cell_goal_x,cell_goal_y) < selected.move_distance {
+							cell_goal_possible = true	
+						} else {
+							cell_goal_possible = false	
+						}
+						
+						
 					} else {
 						cell_goal_possible = false	
 					}

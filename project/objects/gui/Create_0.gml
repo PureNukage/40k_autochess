@@ -18,7 +18,7 @@ var button_buffer = 6
 
 button_ready_width = 96
 button_ready_height = 64
-button_readyX = window_movementX+(window_movement_width/2)-button_ready_width-button_buffer
+button_readyX = window_movementX+(window_movement_width/2)+button_buffer
 button_readyY = window_movementY+(window_movement_height/4)
 button_ready_string = "Ready"
 button_ready_string_help = "Ready unit this turn \nWill attack first next turn"
@@ -30,9 +30,9 @@ button_ready_mouseover = false
 
 button_movement_width = 96
 button_movement_height = 64
-button_movementX = window_movementX+(window_movement_width/2)+button_buffer
+button_movementX = window_movementX+(window_movement_width/2)-button_movement_width-button_buffer
 button_movementY = window_movementY+(window_movement_height/4)
-button_movement_string = "Movement"
+button_movement_string = "Move"
 button_movement_string_help = "Move unit this turn"
 button_movement_color = button_ready_color_free
 button_movement_mouseover = false

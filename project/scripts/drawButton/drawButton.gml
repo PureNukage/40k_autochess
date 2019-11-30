@@ -33,5 +33,6 @@ draw_text(_buttonX+(_button_width/2),_buttonY+(_button_height/2),_button_message
 
 //	Draw button help string
 if argument_count == 8 and _button_mouseover == true {
+	draw_set_valign(fa_bottom)
 	draw_text(_buttonX+(_button_width/2),_buttonY-string_height(_button_message_help)-8,_button_message_help)	
 }

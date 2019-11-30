@@ -27,6 +27,7 @@ switch(match.states)
 			draw_set_color(c_white)
 			
 			draw_set_halign(fa_center)
+			draw_set_valign(fa_top)
 			
 			if match.whose_turn == id {
 				draw_text(_x,_y,"YOUR TURN TO MOVE")

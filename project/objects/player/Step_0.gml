@@ -41,6 +41,18 @@ switch(states)
 				}			
 			}
 			
+			//	If a unit is currently selected
+			if mouse_in_grid and selected > -1 {
+				
+				//	Right click to deselect unit
+				if input.mouse_rightpress {
+					selected = -1
+					selected_grid_x = -1
+					selected_grid_y = -1
+				}
+				
+			}
+			
 			
 			
 		break

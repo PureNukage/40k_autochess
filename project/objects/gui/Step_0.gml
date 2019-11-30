@@ -31,16 +31,27 @@ if match.whose_turn == player.id and player.selected > -1 {
 		button_ready_mouseover = true
 		button_ready_color = button_ready_color_mouseover
 		
-		if input.mouse_leftpress {
-				
+		//	Darken the button color
+		if input.mouse_leftpress or input.mouse_left {
+			button_ready_color = button_ready_color_pressed			
 		}
 		
-		
+		//	Ready the selected unit
+		if input.mouse_leftrelease { 
+			ds_list_add(player.units_ready,player.selected)
+			
+			//	Clean up data
+			player.selected = -1
+			player.selected_grid_x = -1
+			player.selected_grid_y = -1
+			player.states = states.free
+			
+		}
+				
 	} else {
 		button_ready_mouseover = false
 		button_ready_color = button_ready_color_free
-		
-		
+				
 	}
 	#endregion
 	
@@ -49,15 +60,16 @@ if match.whose_turn == player.id and player.selected > -1 {
 		button_movement_mouseover = true
 		button_movement_color = button_ready_color_mouseover
 		
+		//	Darken the button color
 		if input.mouse_leftpress or input.mouse_left {
 			button_movement_color = button_ready_color_pressed
 			
 		}
 		
+		//	Move the selected unit
 		if input.mouse_leftrelease {	
 			player.states = states.movement	
 		}
-
 		
 	} else {
 		button_movement_mouseover = false

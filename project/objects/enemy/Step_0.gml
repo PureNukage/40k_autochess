@@ -83,7 +83,7 @@ switch(states)
 		case states.movement:
 			
 			//	Time to make a move
-			if time.seconds_switch and time.seconds == time_wait {
+			if (time.seconds >= time_wait) {
 				
 				#region	Select a random unit
 				if !ds_list_empty(units_active) {
@@ -91,7 +91,7 @@ switch(states)
 					selected_grid_x = selected.cell_x
 					selected_grid_y = selected.cell_y
 					
-					//	Calculate enemy units within move_distance to my selected unit
+					#region	Calculate enemy units within move_distance to my selected unit
 					ds_list_clear(units_player_nearby)
 					for(var i=0;i<ds_list_size(player.units);i++) {
 						var _enemy = player.units[| i]
@@ -102,6 +102,7 @@ switch(states)
 						} 						
 						
 					}
+					#endregion
 					
 					#region	This unit doesn't have a target!
 					if selected.target == -1 {
@@ -133,7 +134,7 @@ switch(states)
 							}
 						#endregion
 						
-						time_wait = time.seconds + 1
+						time_wait = time.seconds
 						
 					} 
 					#endregion
@@ -147,12 +148,16 @@ switch(states)
 						#region	Found an empty cell!
 						if is_array(check) {
 							
+							debug_log("Target has a free cell!")
+							
 							#region	This unit can move to the free cell!
 							if point_distance(selected_grid_x,selected_grid_y,check[0],check[1]) <= selected.move_distance {
 								
 								move_unit_cellxy(check[0],check[1])
 								
 								time_wait = time.seconds + 1
+								
+								debug_log("This unit is charging its target")
 								
 							} 
 							#endregion
@@ -163,6 +168,8 @@ switch(states)
 								move_unit_closest_cellxy(check[0],check[1])
 								
 								time_wait = time.seconds + 1
+								
+								debug_log("Moving this unit as close to its target as it can")
 							
 							}
 							#endregion
@@ -172,6 +179,10 @@ switch(states)
 						
 						#region	No empty cells
 						else {
+							
+							debug_log("This target has no free cells")
+							
+							move_unit_closest_cellxy(selected.target.cell_x,selected.target.cell_y)
 							
 							time_wait = time.seconds + 1
 							
@@ -189,6 +200,8 @@ switch(states)
 					debug_log("I have no more active units on the battlefield")	
 					
 					round_turn()
+					
+					states = states.free
 				}
 				#endregion		
 				

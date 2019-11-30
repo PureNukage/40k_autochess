@@ -15,6 +15,7 @@ switch(mode)
 					draw_rectangle(_xx,_yy,_xx+cell_width,_yy+cell_height,true)	
 				
 					//	Draw cells x,y
+					draw_set_valign(fa_top)
 					draw_text(_xx+15,_yy+5,string(_x))
 					draw_text(_xx+30,_yy+5,string(_y))
 				
@@ -33,6 +34,16 @@ switch(mode)
 					_yy += cell_height
 				}
 				_xx += cell_width
+			}
+			
+			draw_set_color(c_black)
+			if instance_exists(ork) {
+				with ork {
+					draw_set_valign(fa_middle)
+					draw_text(x,y,string(id))
+					
+					
+				}
 			}
 		
 		break

@@ -42,7 +42,7 @@ if !ds_list_empty(free_cells_x) {
 									
 	//	Find cell x,y after sorting
 	var _closest = distances_sorted[| 0]
-	var _index = ds_list_find_index(distances_not_sorted,ds_list_find_value(distances_sorted,_closest))
+	var _index = ds_list_find_index(distances_not_sorted,_closest)
 	var cellX = free_cells_x[| _index]
 	var cellY = free_cells_y[| _index]
 									

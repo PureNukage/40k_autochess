@@ -106,9 +106,13 @@ switch(states)
 					#region	This unit doesn't have a target!
 					if selected.target == -1 {
 						
+						debug_log("This unit doesn't have a target!")
+						
 						#region	Unit has nearby enemy units
 						if !ds_list_empty(units_player_nearby) {
 							selected.target = irandom_range(0,ds_list_size(units_player_nearby)-1)	
+							
+							debug_log("Gave this unit a nearby target")
 						} 
 						#endregion
 						
@@ -118,6 +122,8 @@ switch(states)
 								//  Select a target enemy that isn't nearby
 								if !ds_list_empty(player.units) {
 									selected.target = ds_list_find_value(player.units,irandom_range(0,ds_list_size(player.units)-1))
+									
+									debug_log("Gave this unit a target NOT nearby")
 								} 
 								//	There are 0 enemy units what-so-ever. Way to go play tester
 								else {

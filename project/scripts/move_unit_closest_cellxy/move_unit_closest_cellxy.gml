@@ -26,11 +26,11 @@ for(var _w=_x1;_w<_x2;_w++) {
 var distances_not_sorted = ds_list_create()
 //	Loop through as many cells we were found empty, measure distance between the cell and the free cell then put into a list
 if !ds_list_empty(free_cells_x) {
-	for(var _i=0;_i<ds_list_size(free_cells_x);_i++) {
-		var _x = gridController.grid_positions_x[free_cells_x[| i]]
-		var _y = gridController.grid_positions_y[free_cells_y[| i]]
-		var _goal_x = gridController.grid_positions_x[_cell_x]
-		var _goal_y = gridController.grid_positions_y[_cell_y]
+	for(var i=0;i<ds_list_size(free_cells_x);i++) {
+		var _x = free_cells_x[| i]
+		var _y = free_cells_y[| i]
+		var _goal_x = _cell_x
+		var _goal_y = _cell_y
 		var _distance = point_distance(_x,_y,_goal_x,_goal_y)
 		ds_list_add(distances_not_sorted,_distance)
 	}

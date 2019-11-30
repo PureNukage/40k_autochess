@@ -41,6 +41,7 @@ if match.whose_turn == player.id and player.selected > -1 {
 			ds_list_add(player.units_ready,player.selected)
 			ds_list_delete(player.units_active,player.selected)
 			player.selected.active = false
+			player.selected.ready = true
 			
 			//	Clean up data
 			player.selected = -1

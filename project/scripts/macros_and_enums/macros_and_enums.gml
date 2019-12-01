@@ -12,8 +12,8 @@ enum states {
 	free,
 	placement,
 	movement,
-	atk_shooting,
-	atk_charge,
-	atk_fight,
+	shooting,
+	charge,
+	fight,
 	morale
 }

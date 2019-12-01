@@ -13,7 +13,7 @@ switch(states)
 	#endregion
 
 	#region Shooting
-		case states.atk_shooting:
+		case states.shooting:
 			var _state = "SHOOTING PHASE"
 		break	
 	#endregion

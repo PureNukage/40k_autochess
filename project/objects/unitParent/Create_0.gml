@@ -5,6 +5,7 @@
 //arm_angle_correction = 0		//	Set as an offset if the arm isn't facing exactly 90* to the right
 //movespeed = 0					//	Set; units max movespeed
 //move_distance = 0				//	Set; number of cells this unit can move
+//shoot_distance = 0			//	Set; number of cells this unit can shoot from
 //states = states.placement		//	Set; the starting state of this unit
 
 arm_rotation = 0				//	Active; the angle of the arm 

@@ -23,7 +23,7 @@ switch(states)
 			}
 			#endregion
 			
-			#region	Open "MOVE" and "READY" window
+			#region	Mouseover unit code during the Movement phase of the game
 			if mouse_in_grid and selected == -1 and match.whose_turn == id and match.states = states.movement {
 				var _xx = gridController.grid_positions_x[input.grid_x]
 				var _yy = gridController.grid_positions_y[input.grid_y]
@@ -43,8 +43,28 @@ switch(states)
 			}
 			#endregion
 			
-			#region	Go into SHOOT mode with a unit
+			#region	Mouseover unit code during the Shooting phase of the game
 			
+			if mouse_in_grid and selected == -1 and match.whose_turn == id and match.states == states.shooting {
+				var _xx = gridController.grid_positions_x[input.grid_x]
+				var _yy = gridController.grid_positions_y[input.grid_y]
+				
+				var _selectable = false
+				var grid_contents = gridController.gridIDs[# input.grid_x, input.grid_y]
+				if grid_contents > -1 and grid_contents.owner == id and grid_contents.ready == true {
+					_selectable = true	
+				}
+				
+				//	Selecting the unit we're hovered over
+				if input.mouse_leftpress and _selectable == true {
+					selected = gridController.gridIDs[# input.grid_x, input.grid_y]
+					selected_grid_x = input.grid_x
+					selected_grid_y = input.grid_y
+					states = states.shooting
+				}	
+				
+				
+			}
 			
 			
 			#endregion
@@ -211,7 +231,56 @@ switch(states)
 	#endregion
 	
 	#region Shooting
-		case states.atk_shooting:
+		case states.shooting:
+		
+		//	If unit selected
+		if mouse_in_grid and selected > -1 {
+			
+			//	Calculate the goal cell
+			if input.grid_moved { 
+				
+				var _x = input.grid_x
+				var _y = input.grid_y
+				
+				//	If this cell is within shooting distance; not empty; not one of my own units
+				if (point_distance(selected_grid_x,selected_grid_y,_x,_y) < selected.shoot_distance)
+				and (gridController.grid[# _x,_y] != -1) and (gridController.gridIDs[# _x,_y].owner != id) {
+					cell_goal_x = _x
+					cell_goal_y = _y
+					cell_goal_possible = true							
+				} else {
+					cell_goal_possible = false	
+				}
+				
+			}
+			
+			//	Shoot with unit if its possible
+			if input.mouse_leftpress and cell_goal_possible == true {
+				selected.states = states.shooting
+				selected.cell_goal_x = cell_goal_x
+				selected.cell_goal_y = cell_goal_y
+				
+				cell_goal_x = -1
+				cell_goal_y = -1
+				cell_goal_possible = false		
+					
+			}	
+			
+			//	Right-click to deselect unit
+			if input.mouse_rightpress {
+				selected = -1
+				selected_grid_x = -1
+				selected_grid_y = -1
+				cell_goal_possible = false
+				cell_goal_x = -1
+				cell_goal_y = -1
+						
+				states = states.free			
+				
+			}
+
+			
+		}
 			
 			
 			

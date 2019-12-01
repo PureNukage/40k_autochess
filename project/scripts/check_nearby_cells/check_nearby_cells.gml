@@ -1,3 +1,5 @@
+/// @param unit
+
 var _enemy = argument[0]
 
 var cell_x_list = ds_list_create()

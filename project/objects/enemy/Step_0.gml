@@ -83,7 +83,7 @@ switch(states)
 		case states.movement:
 			
 			//	Time to make a move
-			if time.seconds_switch and time.seconds == time_wait {
+			if (time.seconds >= time_wait) {
 				
 				#region	Select a random unit
 				if !ds_list_empty(units_active) {
@@ -91,64 +91,106 @@ switch(states)
 					selected_grid_x = selected.cell_x
 					selected_grid_y = selected.cell_y
 					
-					#region	Find a cell near an enemy free unit
-					if !ds_list_empty(units_player_free) {
-						var enemy_unit = ds_list_find_value(units_player_free,irandom_range(0,ds_list_size(units_player_free)-1))
+					#region	Calculate enemy units within move_distance to my selected unit
+					ds_list_clear(units_player_nearby)
+					for(var i=0;i<ds_list_size(player.units);i++) {
+						var _enemy = player.units[| i]
 						
-						var check = check_nearby_cells(enemy_unit)
-						//	Found an empty cell!
-						if is_array(check) {
+						//	This enemy is nearby
+						if point_distance(selected_grid_x,selected_grid_y,_enemy.cell_x,_enemy.cell_y) < selected.move_distance {
+							ds_list_add(units_player_nearby,_enemy)
+						} 						
+						
+					}
+					#endregion
+					
+					#region	This unit doesn't have a target!
+					if selected.target == -1 {
+						
+						debug_log("This unit doesn't have a target!")
+						
+						#region	Unit has nearby enemy units
+						if !ds_list_empty(units_player_nearby) {
+							selected.target = irandom_range(0,ds_list_size(units_player_nearby)-1)	
 							
-							//	Move unit to cell goal x,y
-							move_unit_cellxy(check[0],check[1])
-							
+							debug_log("Gave this unit a nearby target")
 						} 
-						//	No empty cells near this unit!
-						else {
+						#endregion
+						
+						#region	No enemy units nearby
+							else {
 							
-							//	Get rid of this unit from the units_player_free list and then wait another second to think again
-							ds_list_delete(units_player_free,ds_list_find_index(units_player_free,enemy_unit))
-							time_wait = time.seconds + 1
-						}
+								//  Select a target enemy that isn't nearby
+								if !ds_list_empty(player.units) {
+									selected.target = ds_list_find_value(player.units,irandom_range(0,ds_list_size(player.units)-1))
+									
+									debug_log("Gave this unit a target NOT nearby")
+								} 
+								//	There are 0 enemy units what-so-ever. Way to go play tester
+								else {
+									debug_log("ERROR There are 0 enemy units what-so-ever. Way to go play tester...")
+								}
+							
+							}
+						#endregion
+						
+						time_wait = time.seconds
 						
 					} 
 					#endregion
 					
-					#region	There are no enemy free units
+					#region	This unit has a target!
 					else {
-						debug_log("None of the enemies units have free cells!")	
+					
+						//	Does this target have a free cell?
+						var check = check_nearby_cells(selected.target)
+						
+						#region	Found an empty cell!
+						if is_array(check) {
 							
-						//	Choose a random enemy unit
-						if !ds_list_empty(player.units) {
+							debug_log("Target has a free cell!")
+							
+							#region	This unit can move to the free cell!
+							if point_distance(selected_grid_x,selected_grid_y,check[0],check[1]) < selected.move_distance {
 								
-							var random_marine = ds_list_find_value(player.units,irandom_range(0,ds_list_size(player.units)-1))
-							
-							var left_or_right = 0
-							var above_or_under = 0
-							//	Is my selected unit to the left or right of the enemy unit?
-							if selected_grid_x > random_marine.cell_x {
-								left_or_right = 1
-							} else {
-								left_or_right = -1	
-							}
-							if selected_grid_y > random_marine.cell_y {
-								above_or_under = 1
-							} else {
-								above_or_under = -1
-							}
-							
-							var _cell_goal_x = irandom_range(selected.cell_x-left_or_right,random_marine.cell_x+left_or_right)
-							var _cell_goal_y = irandom_range(selected.cell_y-above_or_under,random_marine.cell_y+above_or_under)
+								move_unit_cellxy(check[0],check[1])
 								
-							move_unit_cellxy(_cell_goal_x,_cell_goal_y)						
+								time_wait = time.seconds + 1
+								
+								debug_log("This unit is charging its target")
+								
+							} 
+							#endregion
 							
-						} else {
-							debug_log("ERROR There are no spacemarines")	
+							#region	This unit cannot move to the free cell
+							else {
+								
+								debug_log("Moving this unit as close to its target as it can")
+								
+								move_unit_closest_cellxy(check[0],check[1])
+								
+								time_wait = time.seconds + 1
+							
+							}
+							#endregion
+						
+						} 
+						#endregion				
+						
+						#region	No empty cells
+						else {
+							
+							debug_log("This target has no free cells")
+							
+							move_unit_closest_cellxy(selected.target.cell_x,selected.target.cell_y)
+							
+							time_wait = time.seconds + 1
+							
 						}
-							
-							
+						#endregion
+					
 					}
-				#endregion
+					#endregion
 					
 				} 
 				#endregion
@@ -158,6 +200,8 @@ switch(states)
 					debug_log("I have no more active units on the battlefield")	
 					
 					round_turn()
+					
+					states = states.free
 				}
 				#endregion		
 				

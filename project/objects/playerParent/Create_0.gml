@@ -6,6 +6,7 @@ unit_placeable = true				//	Active; holds the value for if the unit can be place
 units = ds_list_create()			//	Active; list of this players units placed on the battlefield
 units_active = ds_list_create()		//	Active; list of this players units still able to do something this phase
 units_ready = ds_list_create()		//	Active; list of this players units that are readied
+units_can_shoot = ds_list_create()	//	Active; list of this players units that can shoot
 
 selected = -1						//	Active; holds the id of the selected unit
 selected_grid_x = -1				//	Active; holds the cell x of the selected unit

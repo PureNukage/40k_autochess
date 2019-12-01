@@ -136,7 +136,25 @@ switch(states)
 						
 						#region	Unit has nearby enemy units
 						if !ds_list_empty(units_player_nearby) {
-							selected.target = ds_list_find_value(units_player_nearby,irandom_range(0,ds_list_size(units_player_nearby)-1))
+							
+							#region	Look for a nearby unit that can be charged
+							for(var i=0;i<ds_list_size(units_player_nearby);i++) {
+								var _enemy = units_player_nearby[| i]
+								
+								var _check = check_nearby_cells(_enemy)
+								//	This nearby enemy unit can be charged!
+								if is_array(_check) and point_distance(selected_grid_x,selected_grid_y,_check[0],_check[1]) < selected.move_distance {
+									selected.target = _enemy
+								}
+								
+							}
+							#endregion
+							
+							#region	There were no units available to charge
+							if selected == -1 {
+								selected.target = ds_list_find_value(units_player_nearby,irandom_range(0,ds_list_size(units_player_nearby)-1))	
+							}
+							#endregion
 							
 							debug_log("Gave unit "+string(selected.id)+ " a nearby target of " +string(selected.target))
 						} 
@@ -181,6 +199,8 @@ switch(states)
 								move_unit_cellxy(check[0],check[1])
 								
 								time_wait = time.seconds + 1
+								
+								target.can_shoot = false
 								
 								debug_log("Unit "+string(selected.id)+" is charging its target")
 								

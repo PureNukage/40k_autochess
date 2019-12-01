@@ -195,12 +195,12 @@ switch(states)
 							
 							#region	This unit can move to the free cell!
 							if point_distance(selected_grid_x,selected_grid_y,check[0],check[1]) < selected.move_distance {
+							
+								selected.target.can_shoot = false
 								
 								move_unit_cellxy(check[0],check[1])
 								
 								time_wait = time.seconds + 1
-								
-								target.can_shoot = false
 								
 								debug_log("Unit "+string(selected.id)+" is charging its target")
 								

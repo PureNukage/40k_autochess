@@ -61,7 +61,7 @@ switch(states)
 				
 				var _selectable = false
 				var grid_contents = gridController.gridIDs[# input.grid_x, input.grid_y]
-				if grid_contents > -1 and grid_contents.owner == id and grid_contents.ready == true {
+				if grid_contents > -1 and grid_contents.owner == id and grid_contents.ready and grid_contents.can_shoot {
 					_selectable = true	
 				}
 				

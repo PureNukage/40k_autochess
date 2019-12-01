@@ -25,6 +25,7 @@ for(var _w=_x1;_w<_x2;_w++) {
 }
 									
 var distances_not_sorted = ds_list_create()
+var distances_sorted = ds_list_create()
 //	Loop through as many cells we were found empty, measure distance between the cell and the free cell then put into a list
 if !ds_list_empty(free_cells_x) {
 	for(var i=0;i<ds_list_size(free_cells_x);i++) {
@@ -37,7 +38,6 @@ if !ds_list_empty(free_cells_x) {
 	}
 									
 	//	Sort compared distance list
-	var distances_sorted = ds_list_create()
 	ds_list_copy(distances_sorted,distances_not_sorted)
 	ds_list_sort(distances_sorted,true)
 									

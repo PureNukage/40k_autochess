@@ -3,7 +3,7 @@ switch(states)
 	#region Free
 		case states.free:
 	
-			//  Go into placement mode with a spacemarine selected
+			#region Go into placement mode with a spacemarine selected
 			if input.keypress_space and match.whose_turn == id and match.states = states.placement {
 				states = states.placement
 	
@@ -21,8 +21,9 @@ switch(states)
 				}
 
 			}
+			#endregion
 			
-			//	Select a unit to move
+			#region	Open "MOVE" and "READY" window
 			if mouse_in_grid and selected == -1 and match.whose_turn == id and match.states = states.movement {
 				var _xx = gridController.grid_positions_x[input.grid_x]
 				var _yy = gridController.grid_positions_y[input.grid_y]
@@ -40,8 +41,15 @@ switch(states)
 					selected_grid_y = input.grid_y
 				}			
 			}
+			#endregion
 			
-			//	If a unit is currently selected
+			#region	Go into SHOOT mode with a unit
+			
+			
+			
+			#endregion
+			
+			#region	If a unit is currently selected, right-click to deselect
 			if mouse_in_grid and selected > -1 {
 				
 				//	Right click to deselect unit
@@ -52,6 +60,7 @@ switch(states)
 				}
 				
 			}
+			#endregion
 			
 			
 			
@@ -201,8 +210,8 @@ switch(states)
 		break
 	#endregion
 	
-	#region Attack
-		case states.attack:
+	#region Shooting
+		case states.atk_shooting:
 			
 			
 			

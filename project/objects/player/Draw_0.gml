@@ -115,4 +115,27 @@ switch(states)
 			
 		break	
 	#endregion
+	
+	#region Shooting
+		case states.atk_shooting:
+			
+			//	Unit selected
+			if mouse_in_grid and selected > -1 {
+				
+				var _xx = gridController.grid_positions_x[selected_grid_x]
+				var _yy = gridController.grid_positions_y[selected_grid_y]
+				
+				//	Draw the outline around the selected units cell
+				draw_set_color(c_yellow)
+				draw_set_alpha(.33)
+				draw_rectangle(_xx,_yy,_xx+cell_width,_yy+cell_height,true)
+				draw_rectangle(_xx+1,_yy+1,_xx+cell_width-1,_yy+cell_height-1,true)
+				draw_set_alpha(1)
+			}
+			
+			
+			
+			
+		break
+	#endregion
 }

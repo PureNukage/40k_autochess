@@ -94,6 +94,8 @@ switch(states)
 						selected_grid_x = selected.cell_x
 						selected_grid_y = selected.cell_y
 					
+						debug_log("Selecting unit "+string(selected.id))
+						
 						time_wait = time.seconds
 					}
 					#endregion
@@ -188,7 +190,7 @@ switch(states)
 							#region	This unit cannot move to the free cell
 							else {
 								
-								debug_log("Moving this unit as close to its target as it can")
+								debug_log("Target out of move distance. Moving unit "+string(selected)+" as close to its target as it can")
 								
 								move_unit_closest_cellxy(check[0],check[1])
 								
@@ -198,12 +200,12 @@ switch(states)
 							#endregion
 						
 						} 
-						#endregion				
+						#endregion
 						
 						#region	No empty cells
 						else {
 							
-							debug_log("This target has no free cells")
+							debug_log("This target has no free cells. Moving unit "+string(selected)+" as close to its target as it can")
 							
 							move_unit_closest_cellxy(selected.target.cell_x,selected.target.cell_y)
 							

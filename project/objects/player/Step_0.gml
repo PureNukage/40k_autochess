@@ -133,6 +133,7 @@ switch(states)
 				//	Make unit mine
 				unit_placing.owner = id
 				unit_placing.active = true
+				unit_placing.states = states.free
 				unit_placing.cell_x = input.grid_x
 				unit_placing.cell_y = input.grid_y
 				ds_list_add(units,unit_placing)
@@ -269,10 +270,7 @@ switch(states)
 				selected.states = states.shooting
 				selected.cell_goal_x = cell_goal_x
 				selected.cell_goal_y = cell_goal_y
-				
-				cell_goal_x = -1
-				cell_goal_y = -1
-				cell_goal_possible = false		
+				selected.time_wait = time.stream + 60
 					
 			}	
 			

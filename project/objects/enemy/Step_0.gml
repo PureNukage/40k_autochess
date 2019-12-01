@@ -97,7 +97,7 @@ switch(states)
 						var _enemy = player.units[| i]
 						
 						//	This enemy is nearby
-						if point_distance(selected_grid_x,selected_grid_y,_enemy.cell_x,_enemy.cell_y) <= selected.move_distance {
+						if point_distance(selected_grid_x,selected_grid_y,_enemy.cell_x,_enemy.cell_y) < selected.move_distance {
 							ds_list_add(units_player_nearby,_enemy)
 						} 						
 						
@@ -151,7 +151,7 @@ switch(states)
 							debug_log("Target has a free cell!")
 							
 							#region	This unit can move to the free cell!
-							if point_distance(selected_grid_x,selected_grid_y,check[0],check[1]) <= selected.move_distance {
+							if point_distance(selected_grid_x,selected_grid_y,check[0],check[1]) < selected.move_distance {
 								
 								move_unit_cellxy(check[0],check[1])
 								
@@ -165,11 +165,11 @@ switch(states)
 							#region	This unit cannot move to the free cell
 							else {
 								
+								debug_log("Moving this unit as close to its target as it can")
+								
 								move_unit_closest_cellxy(check[0],check[1])
 								
 								time_wait = time.seconds + 1
-								
-								debug_log("Moving this unit as close to its target as it can")
 							
 							}
 							#endregion

@@ -15,7 +15,8 @@ var free_cells_y = ds_list_create()
 //	Loop through grid cells and if the cell is empty toss its x,y into a list
 for(var _w=_x1;_w<_x2;_w++) {
 	for(var _h=_y1;_h<_y2;_h++) {
-		if gridController.grid[# _w, _h] == -1 {
+		var _distance = point_distance(selected_grid_x,selected_grid_y,_w,_h)
+		if gridController.grid[# _w, _h] == -1 and _distance < selected.move_distance {
 			ds_list_add(free_cells_x,_w)
 			ds_list_add(free_cells_y,_h)
 		}
@@ -32,9 +33,7 @@ if !ds_list_empty(free_cells_x) {
 		var _goal_x = _cell_x
 		var _goal_y = _cell_y
 		var _distance = point_distance(_x,_y,_goal_x,_goal_y)
-		if _distance <= selected.move_distance {
-			ds_list_add(distances_not_sorted,_distance)
-		}
+		ds_list_add(distances_not_sorted,_distance)
 	}
 									
 	//	Sort compared distance list
@@ -53,4 +52,9 @@ if !ds_list_empty(free_cells_x) {
 									
 } else {
 	debug_log("ERROR No empty cells in between my target and my selected unit")	
-}							
+}	
+
+ds_list_destroy(free_cells_x)
+ds_list_destroy(free_cells_y)
+ds_list_destroy(distances_not_sorted)
+ds_list_destroy(distances_sorted)

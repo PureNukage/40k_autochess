@@ -2,6 +2,16 @@ switch(states)
 {
 	#region Free
 		case states.free:
+		
+			#region Skip turn if its shooting and you have no ready units
+			if match.whose_turn == id and match.states == states.shooting and ds_list_empty(units_ready) {
+				
+				debug_log("I am skipping turn because I have no ready units")
+				round_turn()
+				
+			}
+			
+			#endregion
 	
 			#region Go into placement mode with a spacemarine selected
 			if input.keypress_space and match.whose_turn == id and match.states = states.placement {

@@ -37,11 +37,15 @@ switch(mode)
 			}
 			
 			draw_set_color(c_black)
-			if instance_exists(ork) {
-				with ork {
-					draw_set_valign(fa_middle)
-					draw_text(x,y,string(id))
+			
+			if instance_exists(unitParent) {
+				with unitParent {
 					
+					draw_set_valign(fa_middle)
+					var _y = y-100
+					draw_text(x,_y,string(id))						_y -= 15
+					draw_text(x,_y,string(Direction))				_y -= 15
+					draw_text(x,_y,string(arm_rotation))			_y -= 15
 					
 				}
 			}

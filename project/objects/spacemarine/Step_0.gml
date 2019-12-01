@@ -1,5 +1,3 @@
-arm_aim_xy(x+1,y)
-
 switch(states)
 {
 	#region Free
@@ -23,6 +21,7 @@ switch(states)
 					pos = -1
 					x_goto = -1
 					y_goto = -1
+					Direction = Direction
 					gridController.grid[# cell_x, cell_y] = -1
 					gridController.gridIDs[# cell_x, cell_y] = -1
 					gridController.grid[# cell_goal_x, cell_goal_y] = object_index
@@ -37,9 +36,19 @@ switch(states)
 					x_goto = path_get_point_x(path,pos)
 					y_goto = path_get_point_y(path,pos)	
 				}
-			}
+			} else {
 			
-			mp_potential_step(x_goto,y_goto,movespeed,false)		
+				//	Calculate direction
+				if cell_goal_x > cell_x {
+					Direction = 1
+				} else if cell_goal_x < cell_x {
+					Direction = -1
+				} else if cell_goal_x == cell_x {
+					Direction = Direction	
+				}
+			
+				mp_potential_step(x_goto,y_goto,movespeed,false)
+			}
 			
 		break
 	#endregion

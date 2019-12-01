@@ -12,6 +12,7 @@ arm_x = x-arm_pivot_x			//	Active; the x-axis point to attach the arm
 arm_y = y-arm_pivot_y			//	Active; the y-axis point to attach the arm
 arm_yscale = 1					//	Active; the image_yscale of the arm
 
+Direction = 0					//	Active; direction this unit is facing
 hspd = 0						//	Active; units horizontal speed
 vspd = 0						//	Active; units vertical speed
 

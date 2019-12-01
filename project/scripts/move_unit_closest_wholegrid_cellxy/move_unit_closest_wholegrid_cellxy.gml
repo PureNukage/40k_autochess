@@ -5,10 +5,10 @@ var _cell_x = argument[0]
 var _cell_y = argument[1]
 
 //	Create a grid that contains the selected unit and the free cell
-var _x1 = min(selected.cell_x,_cell_x)
-var _y1 = min(selected.cell_y,_cell_y)
-var _x2 = max(selected.cell_x,_cell_x)
-var _y2 = max(selected.cell_y,_cell_y)
+var _x1 = 0
+var _y1 = 0
+var _x2 = grid_width
+var _y2 = grid_height
 								
 var free_cells_x = ds_list_create()
 var free_cells_y = ds_list_create()
@@ -51,9 +51,7 @@ if !ds_list_empty(free_cells_x) {
 	move_unit_cellxy(cellX,cellY)									
 									
 } else {
-	debug_log("No empty cells in between my target and my selected unit")
-	
-	//move_unit_closest_wholegrid_cellxy(_cell_x,_cell_y)
+	debug_log("ERROR No empty cells in the entire battlefield. Is that even possible ??")	
 }	
 
 ds_list_destroy(free_cells_x)

@@ -83,7 +83,7 @@ switch(states)
 		case states.movement:
 			
 			//	Time to make a move
-			if (time.seconds >= time_wait) {
+			if (time.seconds >= time_wait) {				
 				
 				#region	Select a random unit
 				if !ds_list_empty(units_active) {

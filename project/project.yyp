@@ -79,6 +79,14 @@
             }
         },
         {
+            "Key": "1bfab16a-c1f5-4bf6-8667-c66ea29c4007",
+            "Value": {
+                "id": "329c0969-0826-4a15-a701-60a59cd38e03",
+                "resourcePath": "scripts\\move_unit_closest_wholegrid_cellxy\\move_unit_closest_wholegrid_cellxy.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "259f73ef-1d91-4883-8c33-b41f561ee4f8",
             "Value": {
                 "id": "f9ae7699-42a8-4ecd-b1bc-3ba16c5bcf03",
@@ -525,6 +533,7 @@
         "9d29346f-ea4c-4473-89f1-d1964ac83e02",
         "b42f76e6-11d5-49e3-87b1-b58d028e0105",
         "472593ed-fae0-47fa-afbd-b48c89dd067a",
+        "1bfab16a-c1f5-4bf6-8667-c66ea29c4007",
         "d67c7a35-b222-4f46-b1ba-e5f84c7874d5",
         "965531f2-5430-4e73-a701-9a4f1a876639",
         "b8480f53-5aed-4a8f-83c2-10af29e3b546",

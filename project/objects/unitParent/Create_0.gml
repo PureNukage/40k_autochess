@@ -29,6 +29,8 @@ cell_goal_x = -1				//	Active; the cell goal x of mine
 cell_goal_y = -1				//	Active; the cell goal y of mine
 
 time_wait = -1					//	Active; time to wait until... something
+aim_x = -1						//	Active; where this unit is aiming its weapon
+aim_y = -1						//	Active; where this unit is aiming its weapon
 
 active = false					//	Active; whether or not this unit can do something still this phase
 ready = false					//	Active; whether or not this unit is readied

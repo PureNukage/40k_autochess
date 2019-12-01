@@ -68,16 +68,23 @@ switch(states)
 		
 			//	Still shooting weapon
 			if time.stream <= time_wait {
-				var _xx = gridController.grid_positions_x[cell_goal_x]+(cell_width/2)
-				var _yy = gridController.grid_positions_y[cell_goal_y]+(cell_height/2)
-				arm_aim_xy(_xx,_yy)	
-			
+				aim_x = gridController.grid_positions_x[cell_goal_x]+(cell_width/2)
+				aim_y = gridController.grid_positions_y[cell_goal_y]+(cell_height/2)
+				arm_aim_xy(aim_x,aim_y)
 			} 
 			//	Done shooting weapon
 			else {
-				if arm_rotation > 17 arm_rotation--
+				if abs(aim_y - y) > 2 {
+					aim_y = lerp(aim_y,y,.3)
+					arm_aim_xy(aim_x,aim_y)
+				}
 				else {
 					states = states.free	
+					cell_goal_x = -1
+					cell_goal_y = -1
+					time_wait = -1
+					ready = false
+					ds_list_delete(player.units_ready,ds_list_find_index(player.units_ready,id))
 					owner.states = states.free
 					owner.selected = -1
 					owner.selected_grid_x = -1
@@ -88,12 +95,7 @@ switch(states)
 				}
 			
 			
-			}
-			
-			//arm_aim_xy(Direction,y)
-			
-			
-			
+			}		
 			
 		break
 	#endregion

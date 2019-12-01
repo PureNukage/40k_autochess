@@ -42,7 +42,7 @@ switch(mode)
 				with unitParent {
 					
 					draw_set_valign(fa_middle)
-					var _y = y
+					var _y = y-100
 					draw_text(x,_y,string(id))						_y -= 15
 					draw_text(x,_y,string(Direction))				_y -= 15
 					draw_text(x,_y,string(arm_rotation))			_y -= 15

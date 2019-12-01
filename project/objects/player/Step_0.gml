@@ -253,9 +253,10 @@ switch(states)
 				var _x = input.grid_x
 				var _y = input.grid_y
 				
-				//	If this cell is within shooting distance; not empty; not one of my own units
+				//	If this cell is within shooting distance; not empty; not one of my own units; not already shooting
 				if (point_distance(selected_grid_x,selected_grid_y,_x,_y) < selected.shoot_distance)
-				and (gridController.grid[# _x,_y] != -1) and (gridController.gridIDs[# _x,_y].owner != id) {
+				and (gridController.grid[# _x,_y] != -1) and (gridController.gridIDs[# _x,_y].owner != id)
+				and (selected.time_wait == -1) {
 					cell_goal_x = _x
 					cell_goal_y = _y
 					cell_goal_possible = true							

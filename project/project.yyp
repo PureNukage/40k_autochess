@@ -151,6 +151,14 @@
             }
         },
         {
+            "Key": "4c5e10e3-3cfd-4add-bd97-1c32824bd582",
+            "Value": {
+                "id": "3683d5bf-117a-4368-97de-e2bda0744a25",
+                "resourcePath": "sprites\\s_ork_idle\\s_ork_idle.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "5469156c-f8ab-495f-a09f-06f02bc9d84f",
             "Value": {
                 "id": "a7c1ce70-dbb0-45ad-8e4f-183cfdfdf094",

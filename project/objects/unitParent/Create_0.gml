@@ -34,5 +34,6 @@ aim_y = -1						//	Active; where this unit is aiming its weapon
 
 active = false					//	Active; whether or not this unit can do something still this phase
 ready = false					//	Active; whether or not this unit is readied
+can_shoot = false				//	Active; this unit can shoot 
 
 target = -1						//	Active; holds the ID of my target

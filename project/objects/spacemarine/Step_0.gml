@@ -84,6 +84,7 @@ switch(states)
 					cell_goal_y = -1
 					time_wait = -1
 					ready = false
+					can_shoot = false
 					ds_list_delete(player.units_ready,ds_list_find_index(player.units_ready,id))
 					owner.states = states.free
 					owner.selected = -1

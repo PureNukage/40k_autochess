@@ -53,7 +53,7 @@ if !ds_list_empty(free_cells_x) {
 } else {
 	debug_log("No empty cells in between my target and my selected unit")
 	
-	//move_unit_closest_wholegrid_cellxy(_cell_x,_cell_y)
+	move_unit_closest_wholegrid_cellxy(_cell_x,_cell_y)
 }	
 
 ds_list_destroy(free_cells_x)

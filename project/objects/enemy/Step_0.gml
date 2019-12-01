@@ -83,13 +83,36 @@ switch(states)
 		case states.movement:
 			
 			//	Time to make a move
-			if (time.seconds >= time_wait) {				
+			if (time.seconds >= time_wait) {	
 				
-				#region	Select a random unit
-				if !ds_list_empty(units_active) {
-					selected = ds_list_find_value(units_active,irandom_range(0,ds_list_size(units_active)-1))
-					selected_grid_x = selected.cell_x
-					selected_grid_y = selected.cell_y
+				#region I don't have a unit selected
+				if selected == -1 { 
+				
+					#region	Select a random unit
+					if !ds_list_empty(units_active) {
+						selected = ds_list_find_value(units_active,irandom_range(0,ds_list_size(units_active)-1))
+						selected_grid_x = selected.cell_x
+						selected_grid_y = selected.cell_y
+					
+						time_wait = time.seconds
+					}
+					#endregion
+					
+					#region No more units of mine left to move
+					else {
+						debug_log("I have no more active units on the battlefield")	
+					
+						round_turn()
+					
+						states = states.free
+					}
+					#endregion		
+					
+				} 
+				#endregion
+				
+				#region I already have a unit selected
+				else {			
 					
 					#region	Calculate enemy units within move_distance to my selected unit
 					ds_list_clear(units_player_nearby)
@@ -107,13 +130,13 @@ switch(states)
 					#region	This unit doesn't have a target!
 					if selected.target == -1 {
 						
-						debug_log("This unit doesn't have a target!")
+						debug_log("Unit "+string(selected.id)+ " doesn't have a target!")
 						
 						#region	Unit has nearby enemy units
 						if !ds_list_empty(units_player_nearby) {
-							selected.target = irandom_range(0,ds_list_size(units_player_nearby)-1)	
+							selected.target = ds_list_find_value(units_player_nearby,irandom_range(0,ds_list_size(units_player_nearby)-1))
 							
-							debug_log("Gave this unit a nearby target")
+							debug_log("Gave unit "+string(selected.id)+ " a nearby target of " +string(selected.target))
 						} 
 						#endregion
 						
@@ -124,7 +147,7 @@ switch(states)
 								if !ds_list_empty(player.units) {
 									selected.target = ds_list_find_value(player.units,irandom_range(0,ds_list_size(player.units)-1))
 									
-									debug_log("Gave this unit a target NOT nearby")
+									debug_log("Gave unit "+string(selected.id)+ " a target NOT nearby of "+string(selected.target))
 								} 
 								//	There are 0 enemy units what-so-ever. Way to go play tester
 								else {
@@ -148,7 +171,7 @@ switch(states)
 						#region	Found an empty cell!
 						if is_array(check) {
 							
-							debug_log("Target has a free cell!")
+							debug_log("Target "+string(selected.target)+ " has a free cell!")
 							
 							#region	This unit can move to the free cell!
 							if point_distance(selected_grid_x,selected_grid_y,check[0],check[1]) < selected.move_distance {
@@ -157,7 +180,7 @@ switch(states)
 								
 								time_wait = time.seconds + 1
 								
-								debug_log("This unit is charging its target")
+								debug_log("Unit "+string(selected.id)+" is charging its target")
 								
 							} 
 							#endregion
@@ -191,19 +214,8 @@ switch(states)
 					
 					}
 					#endregion
-					
-				} 
-				#endregion
-				
-				#region No more units of mine left to move
-				else {
-					debug_log("I have no more active units on the battlefield")	
-					
-					round_turn()
-					
-					states = states.free
 				}
-				#endregion		
+				#endregion
 				
 			}
 				

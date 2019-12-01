@@ -11,10 +11,6 @@ switch(states)
 					pos = -1
 					x_goto = -1
 					y_goto = -1
-					gridController.grid[# cell_x, cell_y] = -1
-					gridController.gridIDs[# cell_x, cell_y] = -1
-					gridController.grid[# cell_goal_x, cell_goal_y] = object_index
-					gridController.gridIDs[# cell_goal_x, cell_goal_y] = id
 					cell_x = cell_goal_x
 					cell_y = cell_goal_y
 					cell_goal_x = -1

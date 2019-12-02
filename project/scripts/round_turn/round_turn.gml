@@ -10,7 +10,7 @@ if match.whose_turn_index >= ds_list_size(match.player_list) {
 		case states.shooting:
 			
 			//	Calculate can_shoots for all players units
-			with unitParent {
+			with playerParent {
 	
 				ds_list_clear(units_can_shoot)
 				for(var i=0;i<ds_list_size(units);i++) {

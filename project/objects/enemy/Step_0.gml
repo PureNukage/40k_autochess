@@ -196,6 +196,10 @@ switch(states)
 							#region	This unit can move to the free cell!
 							if point_distance(selected_grid_x,selected_grid_y,check[0],check[1]) < selected.move_distance {
 							
+								if selected.target.ready {
+									var _list = selected.target.owner.units_ready
+									ds_list_delete(_list,ds_list_find_index(_list,selected.target))	
+								}
 								selected.target.can_shoot = false
 								
 								move_unit_cellxy(check[0],check[1])

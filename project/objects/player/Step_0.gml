@@ -5,12 +5,17 @@ switch(states)
 		
 			#region Skip turn if its shooting and you have no ready units
 			if match.whose_turn == id and match.ready_check and ds_list_empty(units_ready) {
-				
 				debug_log("I am skipping turn because I have no ready units")
 				round_turn()
 				
 			}
+			#endregion
 			
+			#region Skip turn if its shooting and none of your units can shoot
+			if match.whose_turn == id and match.states == states.shooting and !match.ready_check and ds_list_empty(units_can_shoot) {
+				debug_log("I am skipping turn because none of my units can shoot")
+				round_turn()	
+			}	
 			#endregion
 	
 			#region Go into placement mode with a spacemarine selected
@@ -61,8 +66,15 @@ switch(states)
 				
 				var _selectable = false
 				var grid_contents = gridController.gridIDs[# input.grid_x, input.grid_y]
-				if grid_contents > -1 and grid_contents.owner == id and grid_contents.ready and grid_contents.can_shoot {
+				if grid_contents > -1 and grid_contents.owner == id and grid_contents.can_shoot {
 					_selectable = true	
+				}
+				
+				//	Checks for if we're shooting only Ready units or not
+				if match.ready_check {
+					if grid_contents > -1 and !grid_contents.ready {
+						_selectable = false	
+					}
 				}
 				
 				//	Selecting the unit we're hovered over

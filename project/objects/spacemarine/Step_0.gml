@@ -4,7 +4,7 @@ switch(states)
 	#region Free
 		case states.free:
 		
-			if player.selected == id and ready == true and match.states == states.shooting and player.cell_goal_possible == true {
+			if player.selected == id and can_shoot and match.states == states.shooting and player.cell_goal_possible == true {
 				var _xx = gridController.grid_positions_x[input.grid_x]+(cell_width/2)
 				var _yy = gridController.grid_positions_y[input.grid_y]+(cell_height/2)
 				arm_aim_xy(_xx,_yy)

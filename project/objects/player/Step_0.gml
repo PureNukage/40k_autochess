@@ -4,7 +4,7 @@ switch(states)
 		case states.free:
 		
 			#region Skip turn if its shooting and you have no ready units
-			if match.whose_turn == id and match.states == states.shooting and ds_list_empty(units_ready) {
+			if match.whose_turn == id and match.ready_check and ds_list_empty(units_ready) {
 				
 				debug_log("I am skipping turn because I have no ready units")
 				round_turn()

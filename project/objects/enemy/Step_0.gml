@@ -3,6 +3,12 @@ switch(states)
 	#region Free
 		case states.free:
 		
+			//	Skip shooting turn if no readied units
+			if match.whose_turn == id and match.ready_check and ds_list_empty(units_ready) {
+				debug_log("I am skipping turn because I have no ready units")	
+				round_turn()
+			}
+		
 			//	My turn to place units
 			if match.whose_turn == id and match.states == states.placement {
 			

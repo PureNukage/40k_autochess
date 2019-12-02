@@ -92,7 +92,8 @@ switch(states)
 					owner.selected_grid_y = -1
 					owner.cell_goal_x = -1
 					owner.cell_goal_y = -1
-					owner.cell_goal_possible = false		
+					owner.cell_goal_possible = false	
+					round_turn()
 				}
 			
 			

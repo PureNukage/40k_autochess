@@ -3,6 +3,18 @@ switch(states)
 	#region Free
 		case states.free:
 		
+			//	Skip shooting turn if no readied units
+			if match.whose_turn == id and match.states == states.shooting and match.ready_check and ds_list_empty(units_ready) {
+				debug_log("I am skipping turn because I have no ready units")	
+				round_turn()
+			}
+			
+			//	Skip shooting turn if no units can shoot
+			if match.whose_turn == id and match.states = states.shooting and !match.ready_check and ds_list_empty(units_can_shoot) {
+				debug_log("I am skipping turn because none of my units can shoot")	
+				round_turn()	
+			}
+		
 			//	My turn to place units
 			if match.whose_turn == id and match.states == states.placement {
 			
@@ -94,6 +106,8 @@ switch(states)
 						selected_grid_x = selected.cell_x
 						selected_grid_y = selected.cell_y
 					
+						debug_log("Selecting unit "+string(selected.id))
+						
 						time_wait = time.seconds
 					}
 					#endregion
@@ -134,7 +148,25 @@ switch(states)
 						
 						#region	Unit has nearby enemy units
 						if !ds_list_empty(units_player_nearby) {
-							selected.target = ds_list_find_value(units_player_nearby,irandom_range(0,ds_list_size(units_player_nearby)-1))
+							
+							#region	Look for a nearby unit that can be charged
+							for(var i=0;i<ds_list_size(units_player_nearby);i++) {
+								var _enemy = units_player_nearby[| i]
+								
+								var _check = check_nearby_cells(_enemy)
+								//	This nearby enemy unit can be charged!
+								if is_array(_check) and point_distance(selected_grid_x,selected_grid_y,_check[0],_check[1]) < selected.move_distance {
+									selected.target = _enemy
+								}
+								
+							}
+							#endregion
+							
+							#region	There were no units available to charge
+							if selected == -1 {
+								selected.target = ds_list_find_value(units_player_nearby,irandom_range(0,ds_list_size(units_player_nearby)-1))	
+							}
+							#endregion
 							
 							debug_log("Gave unit "+string(selected.id)+ " a nearby target of " +string(selected.target))
 						} 
@@ -175,6 +207,17 @@ switch(states)
 							
 							#region	This unit can move to the free cell!
 							if point_distance(selected_grid_x,selected_grid_y,check[0],check[1]) < selected.move_distance {
+							
+								if selected.target.ready {
+									var _list = selected.target.owner.units_ready
+									ds_list_delete(_list,ds_list_find_index(_list,selected.target))	
+									selected.target.ready = false
+								}
+								if selected.target.can_shoot {
+									var _list = selected.target.owner.units_can_shoot
+									ds_list_delete(_list,ds_list_find_index(_list,selected.target))
+									selected.target.can_shoot = false
+								}
 								
 								move_unit_cellxy(check[0],check[1])
 								
@@ -188,7 +231,7 @@ switch(states)
 							#region	This unit cannot move to the free cell
 							else {
 								
-								debug_log("Moving this unit as close to its target as it can")
+								debug_log("Target out of move distance. Moving unit "+string(selected)+" as close to its target as it can")
 								
 								move_unit_closest_cellxy(check[0],check[1])
 								
@@ -198,12 +241,12 @@ switch(states)
 							#endregion
 						
 						} 
-						#endregion				
+						#endregion
 						
 						#region	No empty cells
 						else {
 							
-							debug_log("This target has no free cells")
+							debug_log("This target has no free cells. Moving unit "+string(selected)+" as close to its target as it can")
 							
 							move_unit_closest_cellxy(selected.target.cell_x,selected.target.cell_y)
 							

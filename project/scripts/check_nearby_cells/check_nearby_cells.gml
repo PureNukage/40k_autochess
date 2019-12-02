@@ -54,12 +54,23 @@ for(var i=0;i<4;i++) {
 
 //	There was at least one available cell!
 if !ds_list_empty(cell_x_list) {
-	var random_index = irandom_range(0,ds_list_size(cell_x_list)-1)
 	
 	var array = []
+	array[0] = -1
+	array[1] = -1
+	//	Check if any free cells are within move_distance
+	for(var i=0;i<ds_list_size(cell_x_list);i++) {
+		if point_distance(selected_grid_x,selected_grid_y,cell_x_list[| i],cell_y_list[| i]) < selected.move_distance {
+			array[0] = cell_x_list[| i]
+			array[1] = cell_y_list[| i]
+		}
+	}
 	
-	array[0] = ds_list_find_value(cell_x_list,random_index)
-	array[1] = ds_list_find_value(cell_y_list,random_index)
+	if array[0] == -1 and array[1] == -1 {
+		var random_index = irandom_range(0,ds_list_size(cell_x_list)-1)
+		array[0] = ds_list_find_value(cell_x_list,random_index)
+		array[1] = ds_list_find_value(cell_y_list,random_index)
+	}
 	
 	//	If this is the only free cell this enemy unit has, remove it from the free list
 	if ds_list_size(cell_x_list) == 1 {

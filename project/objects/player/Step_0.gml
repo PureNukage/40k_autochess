@@ -2,8 +2,23 @@ switch(states)
 {
 	#region Free
 		case states.free:
+		
+			#region Skip turn if its shooting and you have no ready units
+			if match.whose_turn == id and match.ready_check and ds_list_empty(units_ready) {
+				debug_log("I am skipping turn because I have no ready units")
+				round_turn()
+				
+			}
+			#endregion
+			
+			#region Skip turn if its shooting and none of your units can shoot
+			if match.whose_turn == id and match.states == states.shooting and !match.ready_check and ds_list_empty(units_can_shoot) {
+				debug_log("I am skipping turn because none of my units can shoot")
+				round_turn()	
+			}	
+			#endregion
 	
-			//  Go into placement mode with a spacemarine selected
+			#region Go into placement mode with a spacemarine selected
 			if input.keypress_space and match.whose_turn == id and match.states = states.placement {
 				states = states.placement
 	
@@ -21,8 +36,9 @@ switch(states)
 				}
 
 			}
+			#endregion
 			
-			//	Select a unit to move
+			#region	Mouseover unit code during the Movement phase of the game
 			if mouse_in_grid and selected == -1 and match.whose_turn == id and match.states = states.movement {
 				var _xx = gridController.grid_positions_x[input.grid_x]
 				var _yy = gridController.grid_positions_y[input.grid_y]
@@ -40,8 +56,42 @@ switch(states)
 					selected_grid_y = input.grid_y
 				}			
 			}
+			#endregion
 			
-			//	If a unit is currently selected
+			#region	Mouseover unit code during the Shooting phase of the game
+			
+			if mouse_in_grid and selected == -1 and match.whose_turn == id and match.states == states.shooting {
+				var _xx = gridController.grid_positions_x[input.grid_x]
+				var _yy = gridController.grid_positions_y[input.grid_y]
+				
+				var _selectable = false
+				var grid_contents = gridController.gridIDs[# input.grid_x, input.grid_y]
+				if grid_contents > -1 and grid_contents.owner == id and grid_contents.can_shoot {
+					_selectable = true	
+				}
+				
+				//	Checks for if we're shooting only Ready units or not
+				if match.ready_check {
+					if grid_contents > -1 and !grid_contents.ready {
+						_selectable = false	
+					}
+				}
+				
+				//	Selecting the unit we're hovered over
+				if input.mouse_leftpress and _selectable == true {
+					selected = gridController.gridIDs[# input.grid_x, input.grid_y]
+					selected_grid_x = input.grid_x
+					selected_grid_y = input.grid_y
+					states = states.shooting
+				}	
+				
+				
+			}
+			
+			
+			#endregion
+			
+			#region	If a unit is currently selected, right-click to deselect
 			if mouse_in_grid and selected > -1 {
 				
 				//	Right click to deselect unit
@@ -52,6 +102,7 @@ switch(states)
 				}
 				
 			}
+			#endregion
 			
 			
 			
@@ -94,6 +145,7 @@ switch(states)
 				//	Make unit mine
 				unit_placing.owner = id
 				unit_placing.active = true
+				unit_placing.states = states.free
 				unit_placing.cell_x = input.grid_x
 				unit_placing.cell_y = input.grid_y
 				ds_list_add(units,unit_placing)
@@ -201,8 +253,55 @@ switch(states)
 		break
 	#endregion
 	
-	#region Attack
-		case states.attack:
+	#region Shooting
+		case states.shooting:
+		
+		//	If unit selected
+		if mouse_in_grid and selected > -1 {
+			
+			//	Calculate the goal cell
+			if input.grid_moved { 
+				
+				var _x = input.grid_x
+				var _y = input.grid_y
+				
+				//	If this cell is within shooting distance; not empty; not one of my own units; not already shooting
+				if (point_distance(selected_grid_x,selected_grid_y,_x,_y) < selected.shoot_distance)
+				and (gridController.grid[# _x,_y] != -1) and (gridController.gridIDs[# _x,_y].owner != id)
+				and (selected.time_wait == -1) {
+					cell_goal_x = _x
+					cell_goal_y = _y
+					cell_goal_possible = true							
+				} else {
+					cell_goal_possible = false	
+				}
+				
+			}
+			
+			//	Shoot with unit if its possible
+			if input.mouse_leftpress and cell_goal_possible == true {
+				selected.states = states.shooting
+				selected.cell_goal_x = cell_goal_x
+				selected.cell_goal_y = cell_goal_y
+				selected.time_wait = time.stream + 60
+					
+			}	
+			
+			//	Right-click to deselect unit
+			if input.mouse_rightpress {
+				selected = -1
+				selected_grid_x = -1
+				selected_grid_y = -1
+				cell_goal_possible = false
+				cell_goal_x = -1
+				cell_goal_y = -1
+						
+				states = states.free			
+				
+			}
+
+			
+		}
 			
 			
 			

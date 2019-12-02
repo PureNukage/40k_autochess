@@ -1,23 +1,27 @@
-switch(states)
-{
-	#region Placement
+#region Phase Strings
+	switch(states)
+	{
 		case states.placement:
 			var _state = "DEPLOYMENT PHASE"
 		break
-	#endregion
-
-	#region Movement
 		case states.movement:
 			var _state = "MOVEMENT PHASE"
 		break
-	#endregion
-
-	#region Attac
-		case states.attack:
-			var _state = "ATTACK PHASE"
+		case states.shooting:
+			var _state = "SHOOTING PHASE"
 		break	
-	#endregion
-}
+		case states.charge:
+			var _state = "CHARGE PHASE"
+		break
+		case states.fight:
+			var _state = "FIGHTING PHASE"
+		break
+		case states.morale:
+			var _state = "MORALE PHASE"
+		break
+	
+	}
+#endregion
 
 //	Draw current phase
 draw_set_color(c_white)

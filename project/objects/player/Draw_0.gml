@@ -10,9 +10,23 @@ switch(states)
 				
 				var _selectable = false
 				var grid_contents = gridController.gridIDs[# input.grid_x, input.grid_y]
-				if grid_contents > -1 and grid_contents.owner == id and grid_contents.active == true {
-					draw_set_color(c_yellow)
-					_selectable = true
+				if grid_contents > -1 and grid_contents.owner == id {
+					if match.states == states.movement and grid_contents.active == true {
+						draw_set_color(c_yellow)
+						_selectable = true
+					} else if match.states == states.shooting {
+						if match.ready_check {
+							if grid_contents.ready {
+								draw_set_color(c_yellow)
+								_selectable = true
+							}
+						} else {
+							if grid_contents.can_shoot {
+								draw_set_color(c_yellow)
+								_selectable = true
+							}
+						}	
+					}
 				} else {
 					if grid_contents == -1 {
 						draw_set_color(c_black)
@@ -114,5 +128,48 @@ switch(states)
 				}
 			
 		break	
+	#endregion
+	
+	#region Shooting
+		case states.shooting:
+			
+			//	Unit selected
+			if mouse_in_grid and selected > -1 {
+				
+				var _xx = gridController.grid_positions_x[selected_grid_x]
+				var _yy = gridController.grid_positions_y[selected_grid_y]
+				
+				//	Draw the outline around the selected units cell
+				draw_set_color(c_yellow)
+				draw_set_alpha(.33)
+				draw_rectangle(_xx,_yy,_xx+cell_width,_yy+cell_height,true)
+				draw_rectangle(_xx+1,_yy+1,_xx+cell_width-1,_yy+cell_height-1,true)
+				draw_set_alpha(1)
+				
+				//	Draw outline around the cell we're aiming at 
+				var _xx = gridController.grid_positions_x[input.grid_x]
+				var _yy = gridController.grid_positions_y[input.grid_y]
+				
+				if cell_goal_possible == true {
+					draw_set_color(c_green)	
+				} else {
+					draw_set_color(c_red)	
+				}
+				
+				if gridController.grid[# input.grid_x, input.grid_y] == -1 {
+					draw_set_color(c_black)	
+				}
+				
+				draw_set_alpha(.33)
+				draw_rectangle(_xx,_yy,_xx+cell_width,_yy+cell_height,true)
+				draw_rectangle(_xx+1,_yy+1,_xx+cell_width-1,_yy+cell_height-1,true)
+				draw_set_alpha(1)					
+				
+			}
+			
+			
+			
+			
+		break
 	#endregion
 }

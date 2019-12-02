@@ -12,6 +12,28 @@
 		
 			if input.mouse_leftrelease {
 				button_endturn_color = button_endturn_color_pressed
+				
+				//	I am choosing to skip shooting units
+				if match.states == states.shooting {
+					if match.ready_check {
+						if !ds_list_empty(player.units_ready) {
+							for(var i=0;i<ds_list_size(player.units_ready);i++) {
+								var _unit = player.units_ready[| i]
+								_unit.ready = false
+							}
+							ds_list_clear(player.units_ready)
+						}
+					} else {
+						if !ds_list_empty(player.units_can_shoot) {
+							for(var i=0;i<ds_list_size(player.units_can_shoot);i++) {
+								var _unit = player.units_can_shoot[| i]
+								_unit.can_shoot = false
+							}
+							ds_list_clear(player.units_can_shoot)	
+						}	
+					}
+				}
+				
 				round_turn()
 			
 			}	

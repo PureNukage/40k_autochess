@@ -14,9 +14,18 @@ switch(states)
 					if match.states == states.movement and grid_contents.active == true {
 						draw_set_color(c_yellow)
 						_selectable = true
-					} else if match.states == states.shooting and grid_contents.ready == true {
-						draw_set_color(c_yellow)
-						_selectable = true	
+					} else if match.states == states.shooting {
+						if match.ready_check {
+							if grid_contents.ready {
+								draw_set_color(c_yellow)
+								_selectable = true
+							}
+						} else {
+							if grid_contents.can_shoot {
+								draw_set_color(c_yellow)
+								_selectable = true
+							}
+						}	
 					}
 				} else {
 					if grid_contents == -1 {

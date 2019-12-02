@@ -85,7 +85,8 @@ switch(states)
 					time_wait = -1
 					ready = false
 					can_shoot = false
-					ds_list_delete(player.units_ready,ds_list_find_index(player.units_ready,id))
+					ds_list_delete(owner.units_ready,ds_list_find_index(owner.units_ready,id))
+					ds_list_delete(owner.units_can_shoot,ds_list_find_index(owner.units_can_shoot,id))
 					owner.states = states.free
 					owner.selected = -1
 					owner.selected_grid_x = -1

@@ -4,9 +4,15 @@ switch(states)
 		case states.free:
 		
 			//	Skip shooting turn if no readied units
-			if match.whose_turn == id and match.ready_check and ds_list_empty(units_ready) {
+			if match.whose_turn == id and match.states == states.shooting and match.ready_check and ds_list_empty(units_ready) {
 				debug_log("I am skipping turn because I have no ready units")	
 				round_turn()
+			}
+			
+			//	Skip shooting turn if no units can shoot
+			if match.whose_turn == id and match.states = states.shooting and !match.ready_check and ds_list_empty(units_can_shoot) {
+				debug_log("I am skipping turn because none of my units can shoot")	
+				round_turn()	
 			}
 		
 			//	My turn to place units
@@ -205,8 +211,13 @@ switch(states)
 								if selected.target.ready {
 									var _list = selected.target.owner.units_ready
 									ds_list_delete(_list,ds_list_find_index(_list,selected.target))	
+									selected.target.ready = false
 								}
-								selected.target.can_shoot = false
+								if selected.target.can_shoot {
+									var _list = selected.target.owner.units_can_shoot
+									ds_list_delete(_list,ds_list_find_index(_list,selected.target))
+									selected.target.can_shoot = false
+								}
 								
 								move_unit_cellxy(check[0],check[1])
 								

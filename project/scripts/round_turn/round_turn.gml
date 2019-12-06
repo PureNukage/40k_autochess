@@ -11,6 +11,7 @@ match.whose_turn_index++
 		{
 			case states.placement:	
 			case states.movement:
+			case states.charge:
 				match.states += 1	
 			break
 			case states.shooting:

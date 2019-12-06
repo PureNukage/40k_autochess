@@ -8,6 +8,8 @@
 
 #macro mouse_in_grid (input.grid_x > -1 and input.grid_y > -1)
 
+#macro animation_end (image_index > image_number - 1)
+
 enum states {
 	free,
 	placement,

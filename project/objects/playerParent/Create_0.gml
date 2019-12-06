@@ -7,6 +7,7 @@ units = ds_list_create()			//	Active; list of this players units placed on the b
 units_active = ds_list_create()		//	Active; list of this players units still able to do something this phase
 units_ready = ds_list_create()		//	Active; list of this players units that are readied
 units_can_shoot = ds_list_create()	//	Active; list of this players units that can shoot
+units_charging = ds_list_create()	//	Active; list of this players units currently charging
 
 selected = -1						//	Active; holds the id of the selected unit
 selected_grid_x = -1				//	Active; holds the cell x of the selected unit

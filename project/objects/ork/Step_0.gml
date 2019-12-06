@@ -177,6 +177,7 @@ switch(states)
 						states = states.free
 						charging = -1
 						
+						
 						//	Calculate direction
 						if cell_goal_x > cell_x {
 							Direction = 1	

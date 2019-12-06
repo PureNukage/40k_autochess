@@ -287,25 +287,49 @@ switch(states)
 			//	Time to make a move
 			if (time.seconds >= time_wait) {
 				
-				#region	No units left to charge, ending turn
-				if ds_list_empty(units_charging) {
+				#region I already have a unit selected
+				if selected > -1 {
 					
+					if time.seconds_switch debug_log("Waiting for unit "+string(selected)+" to finish attacking")
 					
+					if selected.charging == 3 {
+							
+							
+						ds_list_delete(units_charging,ds_list_find_index(units_charging,selected))
+						selected = -1
+						selected_grid_x = -1
+						selected_grid_y = -1
+							
+					}
 					
-				} 
+				}
 				#endregion
 				
-				#region I have units left to charge!
+				#region I don't have a unit selected
 				else {
+				
+					#region	No units left to charge, ending turn
+					if ds_list_empty(units_charging) {
 					
-					selected = ds_list_find_value(units_charging,irandom_range(0,ds_list_size(units_charging)-1))
-					selected_grid_x = selected.cell_x
-					selected_grid_y = selected.cell_y
+						states = states.free
+						round_turn()
+					
+					} 
+					#endregion
+				
+					#region I have units left to charge!
+					else {
+					
+						selected = ds_list_find_value(units_charging,irandom_range(0,ds_list_size(units_charging)-1))
+						selected_grid_x = selected.cell_x
+						selected_grid_y = selected.cell_y
 					
 					
-					//	Charge this unit into its target
-					selected.states = states.charge
+						//	Charge this unit into its target
+						selected.states = states.charge
 					
+					}
+					#endregion
 				}
 				#endregion
 				

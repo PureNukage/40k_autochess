@@ -82,8 +82,9 @@ switch(states)
 							if ++pos == path_get_number(path) {	
 					
 								charging++
-								sprite_index = s_ork_attack
+								body_sprite = s_ork_attack
 								image_speed = .33
+								image_index = 0
 								pos = -1
 								x_goto = -1
 								y_goto = -1
@@ -118,8 +119,9 @@ switch(states)
 					
 						if animation_end {
 							
-							sprite_index = s_ork_idle
+							body_sprite = s_ork_idle
 							image_speed = 1
+							image_index = 0
 							charging++
 							var xx = gridController.grid_positions_x[cell_x]+(cell_width/2)
 							var yy = gridController.grid_positions_y[cell_y]+(cell_height/2)
@@ -127,7 +129,6 @@ switch(states)
 							pos = 0
 							x_goto = path_get_point_x(path,pos)
 							y_goto = path_get_point_y(path,pos)
-							charging = 2
 						
 						}
 						

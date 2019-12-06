@@ -233,9 +233,9 @@ switch(states)
 									selected.target.can_shoot = false
 								}
 								
-								move_unit_cellxy(check[0],check[1])
+								ds_list_add(units_charging,selected)
 								
-								ds_list_add(units_charging,id)
+								move_unit_cellxy(check[0],check[1])
 								
 								time_wait = time.seconds + 1
 								
@@ -304,8 +304,7 @@ switch(states)
 					
 					
 					//	Charge this unit into its target
-					selected.charging = 0
-					move_unit_cellxy(selected.target.cell_x,selected.target.cell_y)
+					selected.states = states.charge
 					
 				}
 				#endregion

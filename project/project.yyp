@@ -95,6 +95,14 @@
             }
         },
         {
+            "Key": "2dbd0d72-e190-421c-aeb1-e5ae54238c02",
+            "Value": {
+                "id": "54d160f5-6c0e-4779-b473-922577009850",
+                "resourcePath": "sprites\\s_ork_attack\\s_ork_attack.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "32aacb82-9ad1-4da7-940b-7a24ed0de456",
             "Value": {
                 "id": "646e609d-582d-4de6-a4ae-4c839e91939c",

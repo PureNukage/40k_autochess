@@ -50,6 +50,14 @@ switch(states)
 					states = states.charge
 					
 				}
+				
+				//	My turn to fight units
+				if match.states == states.fight {
+					
+					time_wait = time.seconds + 1
+					states = states.fight
+					
+				}
 					
 					
 			}
@@ -232,6 +240,10 @@ switch(states)
 									ds_list_delete(_list,ds_list_find_index(_list,selected.target))
 									selected.target.can_shoot = false
 								}
+								if !selected.target.fighting {
+									selected.target.fighting = true	
+									selected.target.target = selected
+								}
 								
 								ds_list_add(units_charging,selected)
 								
@@ -293,8 +305,6 @@ switch(states)
 					if time.seconds_switch debug_log("Waiting for unit "+string(selected)+" to finish attacking")
 					
 					if selected.charging == 3 {
-							
-							
 						ds_list_delete(units_charging,ds_list_find_index(units_charging,selected))
 						selected = -1
 						selected_grid_x = -1
@@ -310,6 +320,69 @@ switch(states)
 				
 					#region	No units left to charge, ending turn
 					if ds_list_empty(units_charging) {
+					
+						debug_log("No units left to charge. Ending turn")
+						
+						states = states.free
+						round_turn()
+					
+					} 
+					#endregion
+				
+					#region I have units left to charge!
+					else {
+					
+						selected = ds_list_find_value(units_charging,irandom_range(0,ds_list_size(units_charging)-1))
+						selected_grid_x = selected.cell_x
+						selected_grid_y = selected.cell_y
+					
+					
+						//	Charge this unit into its target
+						selected.states = states.charge
+					
+					}
+					#endregion
+				}
+				#endregion
+				
+			}
+			
+			
+			
+			
+			
+		break
+	#endregion
+	
+	#region Fighting
+		case states.fight:
+			
+			//	Time to make a move
+			if (time.seconds >= time_wait) {
+				
+				#region I already have a unit selected
+				if selected > -1 {
+					
+					if time.seconds_switch debug_log("Waiting for unit "+string(selected)+" to finish attacking")
+					
+					if selected.charging == 3 {
+						ds_list_delete(units_charging,ds_list_find_index(units_charging,selected))
+						selected = -1
+						selected_grid_x = -1
+						selected_grid_y = -1
+							
+					}
+					
+				}
+				#endregion
+				
+				#region I don't have a unit selected
+				else {
+				
+					#region	No units left to charge, ending turn
+					if ds_list_empty(units_charging) {
+					
+						debug_log("No units left to fight. Ending turn")
 					
 						states = states.free
 						round_turn()
@@ -341,4 +414,5 @@ switch(states)
 			
 		break
 	#endregion
+	
 }

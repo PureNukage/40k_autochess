@@ -7,13 +7,7 @@ switch(states)
 			if point_distance(x,y,x_goto,y_goto) < 1 {
 				//	End of the path
 				if ++pos == path_get_number(path) {	
-					
-					//	We were attack moving, return to charge state
-					if charging != -1 {
-						states = states.charge	
-					} else {
-						states = states.free
-					}
+					states = states.free
 					pos = -1
 					x_goto = -1
 					y_goto = -1
@@ -177,7 +171,6 @@ switch(states)
 						
 						states = states.free
 						charging = -1
-						
 						
 						//	Calculate direction
 						if cell_goal_x > cell_x {

@@ -12,6 +12,7 @@ match.whose_turn_index++
 			case states.placement:	
 			case states.movement:
 			case states.charge:
+			case states.fight:
 				match.states += 1	
 			break
 			case states.shooting:
@@ -53,6 +54,7 @@ match.whose_turn_index++
 		if match.states != current_phase {
 			switch(match.states)
 			{
+				#region Shooting 
 				case states.shooting:
 			
 					match.ready_check = true
@@ -72,6 +74,26 @@ match.whose_turn_index++
 					}
 				
 				break
+				#endregion
+				
+				#region Fighting
+				case states.fight:				
+					
+					with playerParent {
+						for(var i=0;i<ds_list_size(units);i++) {
+							if units[| i].fighting {
+								ds_list_add(units_charging,units[| i])	
+							}
+						}
+						
+						
+					}
+					
+					
+					
+					
+				break
+				#endregion
 			}
 		}
 		#endregion

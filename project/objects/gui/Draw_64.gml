@@ -1,5 +1,5 @@
 #region	Draw "END TURN" if it is the players turn
-if match.whose_turn == player.id {
+if match.whose_turn == player.id and (match.states != states.charge and match.states != states.fight) {
 	
 	drawButton(button_endturn_width,button_endturn_height,button_endturnX,button_endturnY,button_endturn_color,button_endturn_string,button_endturn_mouseover)
 	

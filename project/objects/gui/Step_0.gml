@@ -1,5 +1,5 @@
 #region End Turn Button
-	if match.whose_turn == player.id {
+	if match.whose_turn == player.id and (match.states != states.charge and match.states != states.fight) {
 	
 		if point_in_rectangle(gui_mouse_x,gui_mouse_y,button_endturnX,button_endturnY,button_endturnX+button_endturn_width,button_endturnY+button_endturn_height) and player.unit_placing == -1 {
 			button_endturn_mouseover = true

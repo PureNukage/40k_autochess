@@ -7,7 +7,13 @@ switch(states)
 			if point_distance(x,y,x_goto,y_goto) < 1 {
 				//	End of the path
 				if ++pos == path_get_number(path) {	
-					states = states.free
+					
+					//	We were attack moving, return to charge state
+					if charging != -1 {
+						states = states.charge	
+					} else {
+						states = states.free
+					}
 					pos = -1
 					x_goto = -1
 					y_goto = -1
@@ -35,6 +41,33 @@ switch(states)
 			mp_potential_step(x_goto,y_goto,movespeed,false)
 			
 			}
+			
+		break
+	#endregion
+	
+	#region Charging
+		case states.charge:
+			
+			switch(charging)
+			{
+				#region	Doing the attack animation
+				case 0:	
+					
+					if animation_end {
+						
+						
+						
+						
+					}
+						
+				break
+				#endregion
+				
+				#region	
+					
+					
+				#endregion
+			}	
 			
 		break
 	#endregion

@@ -35,6 +35,8 @@ aim_y = -1						//	Active; where this unit is aiming its weapon
 
 active = false					//	Active; whether or not this unit can do something still this phase
 ready = false					//	Active; whether or not this unit is readied
+charging = -1					//	Active; holds the states of the charge
+fighting = false				//	Active; whether or not this unit is fighting
 if ranged == 1
 can_shoot = true
 else 

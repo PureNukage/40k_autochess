@@ -3,41 +3,55 @@ switch(states)
 	#region Free
 		case states.free:
 		
-			//	Skip shooting turn if no readied units
-			if match.whose_turn == id and match.states == states.shooting and match.ready_check and ds_list_empty(units_ready) {
-				debug_log("I am skipping turn because I have no ready units")	
-				round_turn()
-			}
-			
-			//	Skip shooting turn if no units can shoot
-			if match.whose_turn == id and match.states = states.shooting and !match.ready_check and ds_list_empty(units_can_shoot) {
-				debug_log("I am skipping turn because none of my units can shoot")	
-				round_turn()	
-			}
-		
-			//	My turn to place units
-			if match.whose_turn == id and match.states == states.placement {
-			
-				time_wait = time.seconds + 1
-				states = states.placement
-			
-			}
-			
-			//	My turn to move units
-			if match.whose_turn == id and match.states == states.movement {
+			//	It is my turn
+			if (match.whose_turn == id) {
 				
-				//	Make all units active
-				ds_list_clear(units_active)
-				for(var i=0;i<ds_list_size(units);i++) {
-					units[| i].active = true
+				//	Skip shooting turn if no readied units
+				if match.states == states.shooting and match.ready_check and ds_list_empty(units_ready) {
+					debug_log("I am skipping turn because I have no ready units")	
+					round_turn()
 				}
-				ds_list_copy(units_active,units)
+			
+				//	Skip shooting turn if no units can shoot
+				if match.states = states.shooting and !match.ready_check and ds_list_empty(units_can_shoot) {
+					debug_log("I am skipping turn because none of my units can shoot")	
+					round_turn()	
+				}
+		
+				//	My turn to place units
+				if match.states == states.placement {
+			
+					time_wait = time.seconds + 1
+					states = states.placement
+			
+				}
+			
+				//	My turn to move units
+				if match.states == states.movement {
 				
-				//	Throw players units into a list
-				ds_list_copy(units_player_free,player.units)
+					//	Make all units active
+					ds_list_clear(units_active)
+					for(var i=0;i<ds_list_size(units);i++) {
+						units[| i].active = true
+					}
+					ds_list_copy(units_active,units)
 				
-				time_wait = time.seconds + 1
-				states = states.movement
+					//	Throw players units into a list
+					ds_list_copy(units_player_free,player.units)
+				
+					time_wait = time.seconds + 1
+					states = states.movement
+				}
+			
+				//	My turn to charge units
+				if match.states == states.charge {
+					
+					time_wait = time.seconds + 1
+					states = states.charge
+					
+				}
+					
+					
 			}
 	
 		break
@@ -205,7 +219,7 @@ switch(states)
 							
 							debug_log("Target "+string(selected.target)+ " has a free cell!")
 							
-							#region	This unit can move to the free cell!
+							#region	This unit can move to the free cell! Charging him!
 							if point_distance(selected_grid_x,selected_grid_y,check[0],check[1]) < selected.move_distance {
 							
 								if selected.target.ready {
@@ -220,6 +234,8 @@ switch(states)
 								}
 								
 								move_unit_cellxy(check[0],check[1])
+								
+								ds_list_add(units_charging,id)
 								
 								time_wait = time.seconds + 1
 								
@@ -262,6 +278,44 @@ switch(states)
 				
 			}
 				
+		break
+	#endregion
+	
+	#region Charging
+		case states.charge:
+			
+			//	Time to make a move
+			if (time.seconds >= time_wait) {
+				
+				#region	No units left to charge, ending turn
+				if ds_list_empty(units_charging) {
+					
+					
+					
+				} 
+				#endregion
+				
+				#region I have units left to charge!
+				else {
+					
+					selected = ds_list_find_value(units_charging,irandom_range(0,ds_list_size(units_charging)-1))
+					selected_grid_x = selected.cell_x
+					selected_grid_y = selected.cell_y
+					
+					
+					//	Charge this unit into its target
+					selected.charging = 0
+					move_unit_cellxy(selected.target.cell_x,selected.target.cell_y)
+					
+				}
+				#endregion
+				
+			}
+			
+			
+			
+			
+			
 		break
 	#endregion
 }
